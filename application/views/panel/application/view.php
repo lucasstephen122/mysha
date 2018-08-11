@@ -5,17 +5,6 @@
 	.hidden{
 		display:none;
 	}
-	.description{
-		padding-top:10px;
-		padding-bottom:10px;
-		border-bottom:1px solid #ccc;
-		margin-bottom:10px;
-	}
-	.description .title{
-		font-size:20px;
-		font-weight:bold;
-		margin-bottom:10px;
-	}
 </style>
 <!-- ============================================================== -->
 <!-- Page wrapper  -->
@@ -184,8 +173,8 @@
                 <div class="card">
                     <!-- Nav tabs -->
 					<ul class="nav nav-tabs profile-tab" role="tablist">
-					<!-- <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#comments" role="tab">Comments</a> </li> -->
-					<li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#personal" role="tab">Personal  </a> </li>
+					<li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#comments" role="tab">Comments</a> </li>
+					<li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#personal" role="tab">Personal  </a> </li>
 					<li class="nav-item"> <a class="nav-link " data-toggle="tab" href="#education" role="tab">Education </a> </li>
 					<li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#workexp" role="tab">Work</a> </li>
 					<li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#activity" role="tab">Activities</a> </li>	
@@ -198,7 +187,7 @@
                     <!-- Tab panes -->
 					
                     <div class="tab-content">
-						 <div class="tab-pane" id="comments" role="tabpanel">
+						 <div class="tab-pane active" id="comments" role="tabpanel">
                             <div class="card-body">
                             	<?php if($type == 'admin' || ($type == 'user' && $user['status_edit'] == 'open')) { ?>
 								<h4 class="card-title"><small>Write down your comment on this application:</small></h4>
@@ -234,19 +223,14 @@
 	                                    <hr>
 	                                </div> 
                                 </div>
+
+					
+
 					
                         </div>
 						</div>
                         <div class="tab-pane " id="education" role="tabpanel">
                             <div class="card-body">
-								<div class='description'>
-									<div class='title'>
-										This is Desc panel
-									</div>
-									<div class='content'>
-										This is personal desc panel , in this section you need to enter these data to system be able to register you.
-									</div>
-								</div>
                                 <div class="row">
 									<div class="col-lg-6">
 										<div class="form-group">
@@ -395,19 +379,22 @@
 										</div>
 									</div>
 								</div>
+								
+								<hr>
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="form-group">
+											<label for="education_description">Description</label>
+											<textarea class="form-control" id="education_description" name="education_description" placeholder=""><?php echo $application['education_description'] ?></textarea>
+										</div>
+									</div>
+								</div>
                         </div>
 						</div>
 						
-						<div class="tab-pane active" id="personal" role="tabpanel">
+						<div class="tab-pane" id="personal" role="tabpanel">
 						<div class="card-body"> 
-							<div class='description'>
-								<div class='title'>
-									This is Desc panel
-								</div>
-								<div class='content'>
-									This is personal desc panel , in this section you need to enter these data to system be able to register you.
-								</div>
-							</div>
+						 
 							<div class="row">
 								<div class="col-lg-4">
 									<div class="form-group">
@@ -501,6 +488,14 @@
 										</select>		
 									</div>
 								</div>
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="form-group">
+											<label for="personal_description">Description</label>
+											<textarea class="form-control" id="personal_description" name="personal_description" placeholder=""><?php echo $application['personal_description'] ?></textarea>
+										</div>
+									</div>
+								</div>
 							</div>
 					
 
@@ -522,14 +517,6 @@
 							 
                         <div class="tab-pane" id="workexp" role="tabpanel">
                             <div class="card-body">
-								<div class='description'>
-									<div class='title'>
-										This is Desc panel
-									</div>
-									<div class='content'>
-										This is personal desc panel , in this section you need to enter these data to system be able to register you.
-									</div>
-								</div>
 								<div class="row">
 									<div class="col-lg-6">
 										<div class="form-group">
@@ -561,90 +548,65 @@
 	                                </div>
 								</div>
 								<hr>
-								
+								<h4>Experience Timeline</h4>
 								<br>
-								<div style='height:40px;'>	
-									<?php if(($type == 'admin') || ($type == 'user' && $user['status_edit'] == 'open')): ?>
-										<button type="button" id="works_new_entry" class="btn btn-info d-none d-lg-block m-l-15 pull-right"><i class="fa fa-plus-circle"></i> Add New Entry</button>
-									<?php endif?>
-									<h4>Experience Timeline</h4>
-								</div><hr>
-								<?php
-									$works_indexes = explode(",",$application["works_index"]);
-									if($application["works_index"] == "")$works_indexes = array();
-								?>
-								<div class='works_form' id="works_form">
-								<?php foreach($works_indexes as $i):?>
-								<div class='works'>
-									<div class="card">
-										<div class="card-body">
-											<div class="row">
-												<div class="col-lg-4">
-													<div class="form-group">
-														<label>Employment Period</label>
-														<select class='form-control' name="work_period_<?php echo $i; ?>">
-															<option value="0" <?php echo $application['work_period_'.$i]=='0'?"selected":""?> >0</option>
-															<option value="1" <?php echo $application['work_period_'.$i]=='1'?"selected":""?>>1</option>
-															<option value="2" <?php echo $application['work_period_'.$i]=='2'?"selected":""?>>2</option>
-															<option value="3" <?php echo $application['work_period_'.$i]=='3'?"selected":""?>>3</option>
-															<option value="3+" <?php echo $application['work_period_'.$i]=='3+'?"selected":""?>>3+</option>
-														</select>
-														</select>
-													</div>
-												</div>
-												<div class="col-lg-4">
-													<div class="form-group">
-														<label>Company / Orgnisation</label>
-														<input type="text" class="form-control" name="work_company_<?php echo $i; ?>" value="<?php echo $application['work_company_'.$i] ?>">
-													</div>
-												</div>
-												<div class="col-lg-4">
-													<div class="form-group">
-														<?php if(($type == 'admin') || ($type == 'user' && $user['status_edit'] == 'open')): ?>
-															<a  class="remove_works pull-right" data-index="<?=$i?>" onclick='removeWorks($(this))'><i class="fa fa-minus-circle" ></i></a>
-														<?php endif?>
-														<label>Location <small>(City, Country)</small></label>
-														<input type="text" class="form-control" name="work_location_<?php echo $i; ?>" value="<?php echo $application['work_location_'.$i] ?>">
-													</div>
+								
+								<?php for($i = 0 ; $i < 3 ; $i ++) { ?>
+								<div class="card">
+			                      	<div class="card-body">
+			                        	<div class="row">
+											<div class="col-lg-4">
+												<div class="form-group">
+													<label>Employment Period</label>
+													<select class='form-control' id="work_period_<?php echo $i; ?>" name="work_period_<?php echo $i; ?>">
+														<option value="0" <?php echo $application['work_period_'.$i]=='0'?"selected":""?> >0</option>
+														<option value="1" <?php echo $application['work_period_'.$i]=='1'?"selected":""?>>1</option>
+														<option value="2" <?php echo $application['work_period_'.$i]=='2'?"selected":""?>>2</option>
+														<option value="3" <?php echo $application['work_period_'.$i]=='3'?"selected":""?>>3</option>
+														<option value="3+" <?php echo $application['work_period_'.$i]=='3+'?"selected":""?>>3+</option>
+													</select>
+													</select>
 												</div>
 											</div>
-							
-											<div class="row">
-												<div class="col-lg-12">
-													<div class="form-group">
-														<label>Key Responsibilities</label>
-														<textarea type="text" class="form-control" name="work_responsibility_<?php echo $i; ?>"><?php echo $application['work_responsibility_'.$i] ?></textarea>
-													</div>
+											<div class="col-lg-4">
+												<div class="form-group">
+													<label>Company / Orgnisation</label>
+													<input type="text" class="form-control" id="work_company_<?php echo $i; ?>" name="work_company_<?php echo $i; ?>" value="<?php echo $application['work_company_'.$i] ?>">
+												</div>
+											</div>
+											<div class="col-lg-4">
+												<div class="form-group">
+													<label>Location <small>(City, Country)</small></label>
+													<input type="text" class="form-control" id="work_location_<?php echo $i; ?>" name="work_location_<?php echo $i; ?>" value="<?php echo $application['work_location_'.$i] ?>">
 												</div>
 											</div>
 										</div>
+						  
+										<div class="row">
+											<div class="col-lg-12">
+												<div class="form-group">
+													<label>Key Responsibilities</label>
+													<textarea type="text" class="form-control" id="work_responsibility_<?php echo $i; ?>" name="work_responsibility_<?php echo $i; ?>"><?php echo $application['work_responsibility_'.$i] ?></textarea>
+												</div>
+											</div>
+										</div>
+                      				</div>
+                    			</div>
+                    			<?php } ?>
+								<hr>
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="form-group">
+											<label for="work_description">Description</label>
+											<textarea class="form-control" id="work_description" name="work_description" placeholder=""><?php echo $application['work_description'] ?></textarea>
+										</div>
 									</div>
 								</div>
-                    			<?php endforeach ?>
-								</div>
-								<input type='hidden' id="works_index" name="works_index" value="<?php echo $application['works_index']; ?>">
 							</div>
 						</div>
 						<div class="tab-pane" id="activity" role="tabpanel">
                             <div class="card-body">
-								<div class='description'>
-									<div class='title'>
-										This is Desc panel
-									</div>
-									<div class='content'>
-										This is personal desc panel , in this section you need to enter these data to system be able to register you.
-									</div>
-								</div>
                               	<div class="table-responsive">
-									<div style='height:40px;'>	
-										<?php if(($type == 'admin') || ($type == 'user' && $user['status_edit'] == 'open')): ?>
-											<button type="button" id="activity_new_entry" class="btn btn-info d-none d-lg-block m-l-15 pull-right"><i class="fa fa-plus-circle"></i> Add New Entry</button>
-										<?php endif?>
-									</div>
-									<?php
-										$activity_indexes = explode(",",$application["activity_index"]);
-										if($application["activity_index"] == "")$activity_indexes = array();
-									?>
 									<table class="table table-striped table-hover">
 										<thead>
 											<tr>
@@ -652,41 +614,34 @@
 												<th>Volunteering/Extra-curricular</th>
 												<th>Location (City, Country)</th>
 												<th>Key Responsibilities</th>
-												<th style='width:50px;'></th>
 											</tr>
 										</thead>
-										<tbody id="activity_form">
-											<?php foreach($activity_indexes as $i):?>
+										<tbody>
+											<?php for($i = 0 ; $i < 4 ; $i ++) { ?>
 											<tr>
 												<td><input type="text" class="form-control date-range"  id="extra_period_<?php echo $i; ?>" name="extra_period_<?php echo $i; ?>" value="<?php echo $application['extra_period_'.$i] ?>"></td>
 												<td><input type="text" class="form-control" id="extra_extra_<?php echo $i; ?>" name="extra_extra_<?php echo $i; ?>" value="<?php echo $application['extra_extra_'.$i] ?>"></td>
 												<td><input type="text" class="form-control" id="extra_location_<?php echo $i; ?>" name="extra_location_<?php echo $i; ?>" value="<?php echo $application['extra_location_'.$i] ?>"></td>
 												<td><input type="text" class="form-control" id="extra_responsibility_<?php echo $i; ?>" name="extra_responsibility_<?php echo $i; ?>" value="<?php echo $application['extra_responsibility_'.$i] ?>"></td>
-												<td>
-													<?php if(($type == 'admin') || ($type == 'user' && $user['status_edit'] == 'open')): ?>
-														<a  class="remove_activity pull-right" data-index="<?=$i?>" onclick='removeActivity($(this))'><i class="fa fa-minus-circle" ></i></a>
-													<?php endif?>
-												</td>
 											</tr>
-											<?php endforeach ?>
+											<?php } ?>
 										</tbody>
 									</table>
-									<input type='hidden' id="activity_index" name="activity_index" value="<?php echo $application['activity_index']; ?>">
 								</div>
 								<hr>
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="form-group">
+											<label for="activity_description">Description</label>
+											<textarea class="form-control" id="activity_description" name="activity_description" placeholder=""><?php echo $application['activity_description'] ?></textarea>
+										</div>
+									</div>
+								</div>
                             </div>
                         </div>
 
 						<div class="tab-pane" id="qa" role="tabpanel">
 							<div class="card-body">
-								<div class='description'>
-									<div class='title'>
-										This is Desc panel
-									</div>
-									<div class='content'>
-										This is personal desc panel , in this section you need to enter these data to system be able to register you.
-									</div>
-								</div>
 								<div class="form-group">
 									<label for="qna_trigger">What triggers your interest to apply for Shaghaf Program?</label>
 									<textarea class="form-control" id="qna_trigger" name="qna_trigger" placeholder=""><?php echo $application['qna_trigger']; ?></textarea>
@@ -732,72 +687,55 @@
 									<textarea class="form-control" id="qna_wand" name="qna_wand" placeholder=""><?php echo $application['qna_wand'] ?></textarea>
 								</div>
 								<hr>
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="form-group">
+											<label for="qa_description">Description</label>
+											<textarea class="form-control" id="qa_description" name="qa_description" placeholder=""><?php echo $application['qa_description'] ?></textarea>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="tab-pane" id="awards" role="tabpanel">
 							<div class="card-body">
-								<div class='description'>
-									<div class='title'>
-										This is Desc panel
-									</div>
-									<div class='content'>
-										This is personal desc panel , in this section you need to enter these data to system be able to register you.
+								<div class='form-group'>
+									<div class="col-lg-12">
+										<label for="adwards_title">Title</label>
+										<input type='text' class='form-control' id="adwards_title" name="adwards_title" value="<?php echo $application['adwards_title'] ?>">	
 									</div>
 								</div>
-								<div style='height:30px;'>
-									<?php if(($type == 'admin') || ($type == 'user' && $user['status_edit'] == 'open')): ?>
-										<button type="button" id="adwards_new_entry" class="btn btn-info d-none d-lg-block m-l-15 pull-right"><i class="fa fa-plus-circle"></i> Add New Entry</button>
-									<?php endif?>
-								</div><hr>
-								<?php
-									$adwards_indexes = explode(",",$application["adwards_index"]);
-									if($application["adwards_index"] == "")$adwards_indexes = array();
-								?>
-								<div class='adwards_form' id="adwards_form">
-									<?php foreach($adwards_indexes as $index):?>
-									<div class='adwards'>
-										<div class='form-group'>
-											<div class="col-lg-12">
-												<?php if(($type == 'admin') || ($type == 'user' && $user['status_edit'] == 'open')): ?>
-													<a  class="remove_adwards pull-right" data-index="<?=$index?>" onclick='removeAdwards($(this))'><i class="fa fa-minus-circle" ></i></a>
-												<?php endif?>
-												<label for="adwards_title">Title</label>
-												<input type='text' class='form-control'  name="adwards_title_<?=$index?>" value="<?php echo $application['adwards_title_'.$index] ?>">	
-											</div>
+								<div class='form-group'>
+									<div class='row'>
+										<div class="col-lg-6">
+											<label for="adwards_issuer">Issuer</label>
+											<input type='text' class='form-control' id="adwards_issuer" name="adwards_issuer" value="<?php echo $application['adwards_issuer'] ?>">	
 										</div>
-										<div class='form-group'>
-											<div class='row'>
-												<div class="col-lg-6">
-													<label for="adwards_issuer">Issuer</label>
-													<input type='text' class='form-control' name="adwards_issuer_<?=$index?>" value="<?php echo $application['adwards_issuer_'.$index] ?>">	
-												</div>
-												<div class="col-lg-6">
-													<label for="adwards_title">Date</label>
-													<input type="text" class="form-control" name="adwards_date_<?=$index?>" placeholder="Date (D/M/YY)"  value="<?php echo $application['adwards_date_'.$index] ?>" aria-required="true" aria-invalid="false">	
-												</div>
-											</div>
+										<div class="col-lg-6">
+											<label for="adwards_title">Date</label>
+											<input type="text" class="form-control" id="adwards_date" name="adwards_date" placeholder="Date (D/M/YY)"  value="<?php echo $application['adwards_date'] ?>" aria-required="true" aria-invalid="false">	
 										</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="awards">
+										Please use this area to tell us about any significant awards or recognitions that you have received in the last 3 years (i.e., prizes, honors, other fellowships, etc.).  You can say 'none' if this does not apply. 
+									</label>
+									<textarea class="form-control" id="awards" name="awards" placeholder=""><?php echo $application['awards']; ?></textarea>
+								</div>
+								<hr>
+								<div class="row">
+									<div class="col-lg-12">
 										<div class="form-group">
-											<label for="awards">Description</label>
-											<textarea class="form-control" name="awards_<?=$index?>" placeholder=""><?php echo $application['awards_'.$index]; ?></textarea>
+											<label for="adwards_description">Description</label>
+											<textarea class="form-control" id="adwards_description" name="adwards_description" placeholder=""><?php echo $application['adwards_description'] ?></textarea>
 										</div>
-										<hr>
 									</div>
-									<?php endforeach;?>
 								</div>
-								<input type='hidden' id="adwards_index" name="adwards_index" value="<?php echo $application['adwards_index']; ?>">
 							</div>
 						</div>
 						<div class="tab-pane" id="jobpref" role="tabpanel">
 							<div class="card-body">
-								<div class='description'>
-									<div class='title'>
-										This is Desc panel
-									</div>
-									<div class='content'>
-										This is personal desc panel , in this section you need to enter these data to system be able to register you.
-									</div>
-								</div>
 								<div class="table-responsive">
 									<table class="table table-striped table-hover">
 										<tbody>
@@ -857,18 +795,18 @@
 									</table>
 								</div>
 								<hr>
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="form-group">
+											<label for="job_description">Description</label>
+											<textarea class="form-control" id="job_description" name="job_description" placeholder=""><?php echo $application['job_description'] ?></textarea>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="tab-pane" id="ref" role="tabpanel">
 							<div class="card-body">
-							<div class='description'>
-								<div class='title'>
-									This is Desc panel
-								</div>
-								<div class='content'>
-									This is personal desc panel , in this section you need to enter these data to system be able to register you.
-								</div>
-							</div>
 							<div class="row">
 								<div class="col-sm-6">
 									
@@ -937,6 +875,15 @@
 										<input class="form-control" id="contact_relationship_2" name="contact_relationship_2" placeholder="" value="<?php echo $application['contact_relationship_2']; ?>">
 									</div>
 
+								</div>
+								<hr>
+								<div class="row">
+									<div class="col-lg-12">
+										<div class="form-group">
+											<label for="ref_description">Description</label>
+											<textarea class="form-control" id="ref_description" name="ref_description" placeholder=""><?php echo $application['ref_description'] ?></textarea>
+										</div>
+									</div>
 								</div>
 								</div>
 								 
@@ -1025,57 +972,6 @@
 <script>
 	
 	var action = 'draft'; 
-	var adwards_indexes = $("#adwards_index").val();
-	var adwards_indexes_array = adwards_indexes.split(",");
-	if($("#adwards_index").val() == "")adwards_indexes_array = []
-	function removeAdwards($obj){
-		// console.log("this",obj);
-		var old_index = $obj.data("index");
-		var index = adwards_indexes_array.indexOf(old_index);
-		if(index < 0){
-			index = adwards_indexes_array.indexOf(old_index.toString());
-		}
-		if (index > -1) {
-			adwards_indexes_array.splice(index, 1);
-		}
-		$("#adwards_index").val(adwards_indexes_array.join(","));
-		$obj.parent().parent().parent().remove();
-	}
-
-	var works_indexes = $("#works_index").val();
-	var works_indexes_array = works_indexes.split(",");
-	if($("#works_index").val() == "")works_indexes_array = []
-	function removeWorks($obj){
-		// console.log("this",obj);
-		var old_index = $obj.data("index");
-		var index = works_indexes_array.indexOf(old_index);
-		if(index < 0){
-			index = works_indexes_array.indexOf(old_index.toString());
-		}
-		if (index > -1) {
-			works_indexes_array.splice(index, 1);
-		}
-		$("#works_index").val(works_indexes_array.join(","));
-		$obj.parent().parent().parent().parent().remove();
-	}
-
-	var activity_indexes = $("#activity_index").val();
-	var activity_indexes_array = activity_indexes.split(",");
-	if($("#activity_index").val() == "")activity_indexes_array = []
-	function removeActivity($obj){
-		// console.log("this",obj);
-		var old_index = $obj.data("index");
-		var index = activity_indexes_array.indexOf(old_index);
-		if(index < 0){
-			index = activity_indexes_array.indexOf(old_index.toString());
-		}
-		if (index > -1) {
-			activity_indexes_array.splice(index, 1);
-		}
-		$("#activity_index").val(activity_indexes_array.join(","));
-		$obj.parent().parent().remove();
-	}
-
 	$( document ).ready(function() {
 		$('#demo-foo-accordion').footable().on('footable_row_expanded', function(e) {
 			$('#demo-foo-accordion tbody tr.footable-detail-show').not(e.row).each(function() {
@@ -1635,122 +1531,6 @@
 				$("#graduate_university_container").hide();
 			}
 		})
-		
-		$("#adwards_new_entry").on("click",function(){	
-			var last_index = 0;
-			if(adwards_indexes_array.length >= 1){
-				last_index = parseInt(adwards_indexes_array[adwards_indexes_array.length-1]);
-			}
-			var new_index = last_index + 1;
-			adwards_indexes_array.push(new_index);
-			$("#adwards_index").val(adwards_indexes_array.join(","));
-			var html = "";
-			html += "<div class='adwards'>";
-			html += 	"<div class='form-group'>";
-			html += 		"<div class='col-lg-12'>";
-			html +=				"<a  class='remove_adwards pull-right' data-index='"+new_index+"' onclick='removeAdwards($(this))'><i class='fa fa-minus-circle'></i></a>";
-			html += 			"<label>Title</label>";
-			html += 			"<input type='text' class='form-control' name='adwards_title_"+new_index+"'>";
-			html += 		"</div>";
-			html += 	"</div>";
-			html += 	"<div class='form-group'>";
-			html += 		"<div class='row'>";
-			html += 			"<div class='col-lg-6'>";
-			html += 				"<label >Issuer</label>";
-			html += 				"<input type='text' class='form-control'  name='adwards_issuer_"+new_index+"'>";
-			html += 			"</div>";
-			html += 			"<div class='col-lg-6'>";
-			html += 				"<label>Date</label>";
-			html += 				"<input type='text' class='form-control'  name='adwards_date_"+new_index+"' placeholder='Date (D/M/YY)' aria-required='true' aria-invalid='false'>";
-			html += 			"</div>";
-			html += 		"</div>";
-			html += 	"</div>";
-			html += 	"<div class='form-group'>";
-			html += 		"<label>Description</label>";
-			html += 		"<textarea class='form-control' name='awards_"+new_index+"'></textarea>";
-			html += 	"</div>";
-			html += 	"<hr>";
-			html += "</div>"
-			$("#adwards_form").append(html);
-		})
-		$("#works_new_entry").on("click",function(){	
-			var last_index = 0;
-			if(works_indexes_array.length >= 1){
-				last_index = parseInt(works_indexes_array[works_indexes_array.length-1]);
-			}
-			var new_index = last_index + 1;
-			works_indexes_array.push(new_index);
-			$("#works_index").val(works_indexes_array.join(","));
-			var html = "";
-
-			html +="<div class='works'>";
-			html +=	"<div class='card'>";
-			html +=		"<div class='card-body'>";
-			html +=			"<div class='row'>";
-			html +=				"<div class='col-lg-4'>";
-			html +=					"<div class='form-group'>";
-			html +=						"<label>Employment Period</label>";
-			html +=						"<select class='form-control' name='work_period_"+new_index+"'>";
-			html +=							"<option value='0' >0</option>";
-			html +=							"<option value='1' >1</option>";
-			html +=							"<option value='2' >2</option>";
-			html +=							"<option value='3' >3</option>";
-			html +=							"<option value='3+'>3+</option>";
-			html +=						"</select>";
-			html +=					"</div>";
-			html +=					"</div>";
-			html +=				"<div class='col-lg-4'>";
-			html +=					"<div class='form-group'>";
-			html +=						"<label>Company / Orgnisation</label>";
-			html +=						"<input type='text' class='form-control' name='work_company_"+new_index+"'>";
-			html +=					"</div>";
-			html +=				"</div>";
-			html +=				"<div class='col-lg-4'>";
-			html +=					"<div class='form-group'>";
-			html +=						"<a  class='remove_works pull-right' data-index='"+new_index+"' onclick='removeWorks($(this))'><i class='fa fa-minus-circle' 							></i></a>";
-			html +=						"<label>Location <small>(City, Country)</small></label>";
-			html +=						"<input type='text' class='form-control' name='work_location_"+new_index+"'>";
-			html +=					"</div>";
-			html +=				"</div>";
-			html +=			"</div>";
-		
-			html +=			"<div class='row'>";
-			html +=				"<div class='col-lg-12'>";
-			html +=					"<div class='form-group'>";
-			html +=						"<label>Key Responsibilities</label>";
-			html +=						"<textarea type='text' class='form-control' name='work_responsibility_"+new_index+"'></textarea>";
-			html +=					"</div>";
-			html +=				"</div>";
-			html +=			"</div>";
-			html +=		"</div>";
-			html +=	"</div>";
-			html +="</div>"
-			$("#works_form").append(html);
-		})
-
-		$("#activity_new_entry").on("click",function(){	
-			var last_index = 0;
-			if(activity_indexes_array.length >= 1){
-				last_index = parseInt(activity_indexes_array[activity_indexes_array.length-1]);
-			}
-			var new_index = last_index + 1;
-			activity_indexes_array.push(new_index);
-			$("#activity_index").val(activity_indexes_array.join(","));
-			var html = "";
-
-			html += "<tr>";
-			html +=	"<td><input type='text' class='form-control date-range'  name='extra_period_"+new_index+"'></td>";
-			html +=	"<td><input type='text' class='form-control' name='extra_extra_"+new_index+"' ></td>";
-			html +=	"<td><input type='text' class='form-control' name='extra_location_"+new_index+"'></td>";
-			html +=	"<td><input type='text' class='form-control' name='extra_responsibility_"+new_index+"'></td>";
-			html +=	"<td>";
-			html +=		"<a  class='remove_activity pull-right' data-index='"+new_index+"' onclick='removeActivity($(this))'><i class='fa fa-minus-circle' ></i></a>";
-			html +=	"</td>";
-			html +="</tr>"
-			$("#activity_form").append(html);
-			$(".date-range").daterangepicker();
-		})
-		
 	}(jQuery));
 
 </script>
