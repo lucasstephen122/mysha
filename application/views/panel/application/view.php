@@ -55,7 +55,7 @@
             <div class="col-md-7 align-self-center text-right">
                 <div class="d-flex justify-content-end align-items-center">
 	                <button type="submit" id="btn_draft" name="draft" class="btn btn-default d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Save as Draft</button>
-                    <button type="submit" id="btn_submit" name="submitted" class="btn btn-info d-none d-lg-block m-l-15"><i class="fa fa-plus-circle"></i> Submit</button>
+                    <button type="submit" id="btn_submit" name="submitted" class="btn btn-info d-none d-lg-block m-l-15" <?= getRemainingSeconds($user) <= 0 ? 'disabled' : '' ?>><i class="fa fa-plus-circle"></i> Submit</button>
                 </div>
             </div>
             <?php } ?>
@@ -151,7 +151,13 @@
                    		<?php } ?>
 					</div>
 					<hr>
-                    <div>
+					<div>
+					<div class="card-body">
+						<h4 class="card-title">
+							<small>End Date:</small>
+						</h4>
+						<input type="date" name="end_date" value="<?=date('Y-m-d', strtotime($user['end_date']))?>" class="form-control"/>
+					</div>
                        
 						<div class="card-body">
 							<div class="row">
@@ -1023,7 +1029,6 @@
 <!-- ============================================================== -->
 
 <script>
-	
 	var action = 'draft'; 
 	var adwards_indexes = $("#adwards_index").val();
 	var adwards_indexes_array = adwards_indexes.split(",");

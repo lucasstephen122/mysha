@@ -473,6 +473,7 @@ class Application extends SRx_Controller
 		$user['phone'] = $this->input->get_string('phone');
 		$user['address'] = $this->input->get_string('address');
 		$user['city'] = $this->input->get_string('city');
+		$user['end_date'] = $this->input->get_string('end_date');
 
 		$user['work'] = $this->input->get_string('work');	
 		$user['bachelor_degree'] = $this->input->get_string('bachelor_degree');
