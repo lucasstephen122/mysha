@@ -16,6 +16,19 @@
 		font-weight:bold;
 		margin-bottom:10px;
 	}
+	.datetimepicker{
+		border:1px solid #ccc;
+		box-shadow:2px 2px 4px #ccc;
+		padding:15px;
+	}
+	.datetimepicker td{
+		padding:8px;
+	}
+	.datepicker{
+		border:1px solid #ccc;
+		box-shadow:2px 2px 4px #ccc;
+		padding:15px;
+	}
 </style>
 <!-- ============================================================== -->
 <!-- Page wrapper  -->
@@ -1155,8 +1168,17 @@
 		}
 		function init_application()
 		{
-			// $('#dob').datepicker({dateFormat: 'dd/mm/yy'});
-			$('#end_date').bootstrapMaterialDatePicker({ format : 'YYYY:MM:DD HH:mm' });
+			$('#dob').datepicker({dateFormat: 'dd/mm/yy'});
+
+			$('#end_date').datetimepicker({ 
+				format : 'yyyy-mm-dd hh:ii',
+				autoclose: true,
+				todayBtn: true,
+				pickerPosition: "top-left",
+				startDate: "2013-02-14 10:00",
+				minuteStep: 5
+			});
+
 			$(".datepicker").datepicker({dateFormat: 'dd/mm/yy'});
 
 			$('#adwards_date').datepicker({dateFormat: 'dd/mm/yy'});

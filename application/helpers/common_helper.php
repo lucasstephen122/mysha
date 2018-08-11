@@ -1045,9 +1045,10 @@
         if (empty($user['end_date'])) {
             return NULL;
         }
-        $timeFirst  = strtotime(date('Y-m-d'));
+        $timeFirst  = strtotime(date('Y-m-d H:i'));
         $timeSecond = strtotime($user['end_date']);
         $differenceInSeconds = $timeSecond - $timeFirst;
+
         return $differenceInSeconds;
     }
 
