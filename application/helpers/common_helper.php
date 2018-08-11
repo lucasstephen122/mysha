@@ -1039,6 +1039,14 @@
         return $age;
     }
 
+    function getRemainingSeconds($user)
+    {
+        $timeFirst  = strtotime(date('Y-m-d'));
+        $timeSecond = strtotime($user['end_date']);
+        $differenceInSeconds = $timeSecond - $timeFirst;
+        return $differenceInSeconds;
+    }
+
     function is_valid_email($email)
     {
         return filter_var($email, FILTER_VALIDATE_EMAIL) && preg_match('/@.+\./', $email);

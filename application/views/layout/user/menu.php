@@ -19,9 +19,7 @@
                         <li>
                             <a class=" waves-effect waves-dark" href="<?php echo $base_url ?>user/application" aria-expanded="false">
                                 <i class="mdi mdi-account-multiple"></i>
-                                <span class="hide-menu">My Application
-
-                                </span>
+                                <span class="hide-menu">My Application</span>
                             </a>
                         </li>
                         <li>
@@ -51,6 +49,33 @@
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
+                <label id="countdown" class="timer text-center" style="display:block;color:white;"></label>
             </div>
             <!-- End Sidebar scroll-->
         </aside>
+
+<script>
+var seconds = <?= getRemainingSeconds($user) ?>;
+function timer() {
+    var days        = Math.floor(seconds/24/60/60);
+    var hoursLeft   = Math.floor((seconds) - (days*86400));
+    var hours       = Math.floor(hoursLeft/3600);
+    var minutesLeft = Math.floor((hoursLeft) - (hours*3600));
+    var minutes     = Math.floor(minutesLeft/60);
+    var remainingSeconds = seconds % 60;
+    if (remainingSeconds < 10) {
+        remainingSeconds = "0" + remainingSeconds; 
+    }
+    document.getElementById('countdown').innerHTML = days + ":" + hours + ":" + minutes + ":" + remainingSeconds;
+    if (seconds == 0) {
+        clearInterval(countdownTimer);
+        document.getElementById('countdown').innerHTML = "Time is up";
+        const submit_button = document.getElementById('btn_submit');
+        if (submit_button)
+            submit_button.disabled = true;
+    } else {
+        seconds--;
+    }
+}
+var countdownTimer = setInterval('timer()', 1000);
+</script>
