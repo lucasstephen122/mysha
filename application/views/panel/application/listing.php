@@ -211,7 +211,7 @@
                                         <td><?php echo $user['name'] ?></td>
                                         <td><?php echo $application['first_preference']; ?></td>
                                         <td><?php echo $user['city'] ?></td>
-                                        <td><?= $user['dob'] ? calc_age($user['dob']) : ''; ?></td>
+                                        <td><?= $user['dob'] ? calc_age($user['dob'])>0 ? calc_age($user['dob']) : '' : ''; ?></td>
                                         <td><?php echo format_date($user['created_on']); ?></td>
                                         <td><?php echo $user['status_text']; ?></td>
                                         <td> &nbsp; <a href="<?php echo $base_url ?>panel/application/view/<?php echo $user['user_id'] ?>" class="btn btn-success btn-circle"><i class="fa fa-edit"></i> </a>&nbsp;<button type="button" class="btn btn-danger btn-circle"><i class="fa fa-times"></i> </button>&nbsp;</td>

@@ -1,3 +1,6 @@
+ <?php
+    $total_second = getRemainingSeconds($user);
+ ?>
  <aside class="left-sidebar">
             <div class="left-sidebar-header d-flex no-block nav-text-box align-items-center">
                 <span>
@@ -49,13 +52,16 @@
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
+                <?php if (!empty($total_second)): ?>
                 <label id="countdown" class="timer text-center" style="display:block;color:white;"></label>
+                <?php endif; ?>
             </div>
             <!-- End Sidebar scroll-->
         </aside>
 
+<?php if (!empty($total_second)): ?>
 <script>
-var seconds = <?= getRemainingSeconds($user) ?>;
+var seconds = <?= $total_second ?>;
 function timer() {
     var days        = Math.floor(seconds/24/60/60);
     var hoursLeft   = Math.floor((seconds) - (days*86400));
@@ -79,3 +85,4 @@ function timer() {
 }
 var countdownTimer = setInterval('timer()', 1000);
 </script>
+<?php endif; ?>

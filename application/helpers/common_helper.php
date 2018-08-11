@@ -1036,11 +1036,15 @@
         $age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2]))) > date("md")
             ? ((date("Y") - $birthDate[2]) - 1)
             : (date("Y") - $birthDate[2]));
+        if ($age<0) return 0;
         return $age;
     }
 
     function getRemainingSeconds($user)
     {
+        if (empty($user['end_date'])) {
+            return NULL;
+        }
         $timeFirst  = strtotime(date('Y-m-d'));
         $timeSecond = strtotime($user['end_date']);
         $differenceInSeconds = $timeSecond - $timeFirst;
