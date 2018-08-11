@@ -1029,6 +1029,16 @@
         return $age;
     }
 
+    function calc_age($birth)
+    {
+        $birthDate = explode("/", $birth);
+        //get age from date or birthdate
+        $age = (date("md", date("U", mktime(0, 0, 0, $birthDate[0], $birthDate[1], $birthDate[2]))) > date("md")
+            ? ((date("Y") - $birthDate[2]) - 1)
+            : (date("Y") - $birthDate[2]));
+        return $age;
+    }
+
     function is_valid_email($email)
     {
         return filter_var($email, FILTER_VALIDATE_EMAIL) && preg_match('/@.+\./', $email);
