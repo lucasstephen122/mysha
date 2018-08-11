@@ -2,7 +2,7 @@
 global $config;
 
 // $config['base_url'] = 'http://shaghaf.kkf.org.sa/v2/';
-$config['base_url'] = 'http://mysha.com/';
+$config['base_url'] = 'http://localhost/v2/';
 $config['environment'] = 'development';
 $config['language']	= 'english';
 

@@ -62,18 +62,20 @@
     <link rel="stylesheet" href="<?php echo $base_url; ?>assets/plugins/uploader/css/jquery.fileupload-ui.css" rel="stylesheet"/>
 
 
-    <!-- <link rel="stylesheet" href="<?php echo $base_url; ?>assets/plugins/daterange/daterangepicker.css" rel="stylesheet"/>
-    <script src="<?php echo $base_url; ?>assets/plugins/daterange/daterangepicker.js"></script> -->
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    
+    <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" /> -->
 
     <script src="<?php echo $base_url; ?>assets/js/ib-functions.js"></script>
     <script src="<?php echo $base_url; ?>assets/js/ib-global.js"></script>
     <script src="<?php echo $base_url; ?>assets/js/ib-ui.js"></script>
     <script src="<?php echo $base_url; ?>assets/js/util.js"></script>
     <script src="<?php echo $base_url; ?>assets/js/uploader.js"></script>
-        
+    <!-- <link rel="stylesheet" href="<?php echo $base_url; ?>assets/plugins/daterange/vendor.css" rel="stylesheet"/>
+    <script src="<?php echo $base_url; ?>assets/plugins/daterange/vendor.js"></script> -->
+    <link rel="stylesheet" href="<?php echo $base_url; ?>assets/plugins/daterange/daterangepicker.css" rel="stylesheet"/>
+    <script src="<?php echo $base_url; ?>assets/plugins/daterange/daterangepicker.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
