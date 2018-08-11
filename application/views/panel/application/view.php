@@ -303,7 +303,7 @@
 									<div class="col-lg-4">
 										<div class="form-group">
 											<label for="bachelor_enrollment">Period of enrollment</label>
-											<input type="text" class="form-control date-range" id="bachelor_enrollment" name="bachelor_enrollment" placeholder="mm/yyyy - mm/yyyy, or present" value="<?php echo $application['bachelor_enrollment'] ?>">
+											<input type="text" class="form-control"  id="bachelor_enrollment" name="bachelor_enrollment" placeholder="mm/yyyy - mm/yyyy, or present" value="<?php echo $application['bachelor_enrollment'] ?>">
 										</div>
 									</div>
 									<div class="col-lg-4">
@@ -1077,11 +1077,11 @@
 	}
 
 	$( document ).ready(function() {
-		$('#demo-foo-accordion').footable().on('footable_row_expanded', function(e) {
-			$('#demo-foo-accordion tbody tr.footable-detail-show').not(e.row).each(function() {
-				$('#demo-foo-accordion').data('footable').toggleDetail(this);
-			});
-		});
+		// $('#demo-foo-accordion').footable().on('footable_row_expanded', function(e) {
+		// 	$('#demo-foo-accordion tbody tr.footable-detail-show').not(e.row).each(function() {
+		// 		$('#demo-foo-accordion').data('footable').toggleDetail(this);
+		// 	});
+		// });
     });
 
 	$(function()
@@ -1140,7 +1140,17 @@
 				}
 			}
 		}
-
+		function init_daterangepicker($obj){
+			$obj.dateRangePicker(
+			{
+				startOfWeek: 'monday',
+				separator : ' ~ ',
+				format: 'MM/DD/YYYY',
+				autoClose: false,
+				monthSelect: true,
+    			yearSelect: [1900, moment().get('year')]
+			});
+		}
 		function init_application()
 		{
 			$('#dob').datepicker({dateFormat: 'dd/mm/yy'});
@@ -1148,11 +1158,12 @@
 			$('#btn_draft').click(function() {
 				action = 'draft';
 			});
-			// $('.date-range').daterangepicker({
-			// 	startDate: "0000-00-00",
-			// 	endDate: "",
-			// });
-			$(".date-range").daterangepicker();
+			// $(".date-range").dateRangePicker({});
+			init_daterangepicker($('#bachelor_enrollment'));
+			init_daterangepicker($('#graduate_enrollment'));
+			activity_indexes_array.forEach(function(value){
+				init_daterangepicker($('#extra_period_'+value));
+			})
 			$('#btn_submit').click(function() {
 				action = 'submit';
 			});
@@ -1739,7 +1750,7 @@
 			var html = "";
 
 			html += "<tr>";
-			html +=	"<td><input type='text' class='form-control date-range'  name='extra_period_"+new_index+"'></td>";
+			html +=	"<td><input type='text' class='form-control date-range'  id='extra_period_"+new_index+"' name='extra_period_"+new_index+"'></td>";
 			html +=	"<td><input type='text' class='form-control' name='extra_extra_"+new_index+"' ></td>";
 			html +=	"<td><input type='text' class='form-control' name='extra_location_"+new_index+"'></td>";
 			html +=	"<td><input type='text' class='form-control' name='extra_responsibility_"+new_index+"'></td>";
@@ -1748,7 +1759,7 @@
 			html +=	"</td>";
 			html +="</tr>"
 			$("#activity_form").append(html);
-			$(".date-range").daterangepicker();
+			init_daterangepicker($("#extra_period_"+new_index))
 		})
 		
 	}(jQuery));

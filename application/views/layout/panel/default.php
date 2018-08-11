@@ -61,6 +61,12 @@
     <script src="<?php echo $base_url; ?>assets/plugins/uploader/js/jquery.fileupload.js"></script>
     <link rel="stylesheet" href="<?php echo $base_url; ?>assets/plugins/uploader/css/jquery.fileupload-ui.css" rel="stylesheet"/>
     
+    <link rel="stylesheet" href="<?php echo $base_url; ?>assets/plugins/daterange/daterangepicker.min.css" rel="stylesheet"/>
+    <script src="<?php echo $base_url; ?>assets/plugins/daterange/moment.min.js"></script>
+    <script src="<?php echo $base_url; ?>assets/plugins/daterange/jquery_daterangepicker.js"></script>
+
+
+
     <script src="<?php echo $base_url; ?>assets/js/ib-functions.js"></script>
     <script src="<?php echo $base_url; ?>assets/js/ib-global.js"></script>
     <script src="<?php echo $base_url; ?>assets/js/ib-ui.js"></script>
