@@ -100,14 +100,6 @@
                             </a>
                         </li>
                         <?php } ?>
-                        <?php if ($user): ?>
-                        <li>
-                            <a class=" waves-effect waves-dark" href="<?= $base_url.'panel/application/manage_comments/'.$user['user_id'] ?>" aria-expanded="false">
-                                <i class="fa fa-align-justify"></i>
-                                <span class="hide-menu">Comments</span>
-                            </a>
-                        </li>
-                        <?php endif; ?>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->

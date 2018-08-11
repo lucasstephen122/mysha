@@ -204,45 +204,6 @@
                     <!-- Tab panes -->
 					
                     <div class="tab-content">
-						 <div class="tab-pane" id="comments" role="tabpanel">
-                            <div class="card-body">
-                            	<?php if($type == 'admin' || ($type == 'user' && $user['status_edit'] == 'open')) { ?>
-								<h4 class="card-title"><small>Write down your comment on this application:</small></h4>
-								<div class="form-group">
-									<textarea rows="3" class="form-control" name="comment" id="comment"></textarea>
-								</div>
-								<?php if($this->app_library->is_role_session('reviewer')) { ?>
-								<div class="form-group">
-									<input type="checkbox" name="public" id="public" value="Y"> Share this comment with user
-								</div>
-								<?php } ?>
-								<div class="form-group">
-								<input class="btn btn-block btn-primary" type="button" id="btn_comment" value="Submit your comment"/>
-								</div>
-								<hr>
-								<?php } ?>
-								<h4 class="card-title"><small>All Comments For this Application:</small></h4>
-							 	<div class="profiletimeline" id="cnt_comments">
-
-                                </div>
-
-                                <div style="display: none">
-                                	<div id="cnt_comment">
-	                                	<div class="sl-item">
-	                                        <div class="sl-left"> <img src="" alt="user" class="img-circle commenter_photo"> </div>
-	                                        <div class="sl-right">
-	                                            <div><a href="javascript:void(0)" class="link commenter"></a> <span class="sl-date comment_on"></span>
-	                                                <blockquote class="m-t-10 comment">
-	                                                </blockquote>
-	                                            </div>
-	                                        </div>
-	                                    </div>
-	                                    <hr>
-	                                </div> 
-                                </div>
-					
-                        </div>
-						</div>
                         <div class="tab-pane " id="education" role="tabpanel">
                             <div class="card-body">
 								<div class='description'>
@@ -524,7 +485,7 @@
 
 			 
                     </div>
-						</div>
+				</div>
 							 
                         <div class="tab-pane" id="workexp" role="tabpanel">
                             <div class="card-body">
@@ -948,17 +909,51 @@
 								 
 							</div>
 						</div>
-						 
-                            </div>
-                        </div>
-                      
-                    </div>
-                </div>
-            </div>
+					</div>
+				</div>
+        </form>
+				<?php if($type == 'admin') { ?>
+				<div class="card" style="margin-top:20px">
+					<div class="card-body">
+						<form action="<?= $base_url.'panel/application/comment/uc/' ?>" method="POST">
+							<input type="hidden" name="user_id" id="user_id" value="<?= $user['user_id'] ?>">
+							<h4 class="card-title"><small>Write down your comment on this application:</small></h4>
+							<div class="form-group">
+								<textarea rows="3" class="form-control" name="comment" id="comment" required></textarea>
+							</div>
+							<div class="form-group">
+								<input class="btn btn-block btn-primary" type="submit" value="Submit your comment"/>
+							</div>
+							<hr>
+						</form>
+						<hr>
+						<h4 class="card-title"><small>All Comments For this Application:</small></h4>
+						<div class="profiletimeline" id="cnt_comments">
+						</div>
+						<div style="display: none">
+							<div id="cnt_comment">
+								<div class="sl-item">
+									<div class="sl-left"> <img src="" alt="user" class="img-circle commenter_photo"> </div>
+									<div class="sl-right">
+										<div><a href="javascript:void(0)" class="link commenter"></a> <span class="sl-date comment_on"></span>
+											<blockquote class="m-t-10 comment">
+											</blockquote>
+										</div>
+									</div>
+								</div>
+								<hr>
+							</div> 
+						</div>
+					</div>
+				</div>
+				<?php } ?>
+
+			</div>
+		</div>
+    </div>
             <!-- Column -->
         </div>
         <!-- Row -->
-        </form>
         <!-- ============================================================== -->
         <!-- End PAge Content -->
         <!-- ============================================================== -->

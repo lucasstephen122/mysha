@@ -769,7 +769,7 @@ class Application extends SRx_Controller
 
 		$comments = $comment_service->get_user_comments($user_id);
 		if ($from==='uc') {
-			$this->redirect('panel/application/manage_comments/'.$user_id);
+			$this->redirect('panel/application/view/'.$user_id);
 		}
 		else {
 			json_response($comments);
