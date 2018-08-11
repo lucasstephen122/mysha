@@ -207,6 +207,12 @@
 
 			return $limit;
 		}
+		public function getReviewers(){
+			$query = 'SELECT * FROM '.Table::$users." WHERE `type`='admin' and `role`='reviewer' ";
+			$this->connector->query($query);
+            $reviewers = $this->connector->get_rows();
+            return $reviewers;
+		}
 	}
 
 	class User_search_criteria

@@ -301,11 +301,17 @@ class User extends SRx_Controller
 		$comment['public'] = 'Y';
 
 		$comment_id = $comment_service->save_comment($comment_id , $comment);
+		
+		$reviewers = $user_service->getReviewers();
+		foreach($reviewers as $reviewer){
+			$this->notification_library->send_template_emails([$reviewer['email']] , 'User sent comment' , 'user_comment' , $reviewer);
+		}
 
 		$log_service = Factory::get_service('log_service');
 		$log_service->save($user_id , $this->user_session->get_user_id() , 'application_comment');
 
 		$comments = $comment_service->get_user_comments($user_id);
+		
 		if ($from==='uc') {
 			$this->redirect('user/comments');
 		}

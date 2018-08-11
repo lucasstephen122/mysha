@@ -594,12 +594,11 @@
 			Logger::log('email.send' , '--------------------------------------');
 			Logger::log('email.send' , 'Template Email : '.$template);
 			Logger::log('email.send' , $parse);
-
+			
 			global $config;
 			$body = file_get_contents($config['root_dir'].'/assets/templates/'.$template.'.html');
 			$subject = $this->ci->util->parse($subject , $parse);
 			$body = $this->ci->util->parse($body , $parse);
-
 			return $this->send_email($tos , $subject , $body , $attachments);
 		}
 

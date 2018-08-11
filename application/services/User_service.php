@@ -112,4 +112,27 @@
 				return false;
 			}
 		}
+		public function get_user_by_id($id)
+		{
+			$criteria = new Criteria();
+			$criteria->add_criteria(User_search_criteria::$USER_ID , $id);
+			$criteria->add_criteria(User_search_criteria::$ARCHIVE , 'N');
+			$criteria->set_require_count(false);
+
+			$search_result = $this->search_users($criteria);
+			$users = $search_result['result'];
+			if(count($users))
+			{
+				$user = $users[0];
+				return $user;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		public function getReviewers(){
+			$reviewers = $this->ci->user_model->getReviewers();
+			return $reviewers;
+		}
 	}

@@ -762,6 +762,11 @@ class Application extends SRx_Controller
 		$comment['public'] = $public;
 		$comment['comment'] = $this->input->get_required_string('comment');
 
+		$sel_user = $user_service->get_user_by_id($user_id);
+		$sel_user["comment"] = $this->input->get_required_string('comment');
+		$this->notification_library->send_template_emails([$sel_user['email']] , 'The reviewer sent you new comment' , 'reviewer_comment' , $sel_user);
+		$this->notification_library->send_template_sms($sel_user, 'reviewer_comment');
+
 		$comment_id = $comment_service->save_comment($comment_id , $comment);
 
 		$log_service = Factory::get_service('log_service');
