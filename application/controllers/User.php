@@ -62,7 +62,7 @@ class User extends SRx_Controller
 
 		if($is_valid)
 		{
-			$this->redirect("user/application");
+			$this->redirect("user/welcome");
 		}
 		else
 		{
@@ -174,6 +174,13 @@ class User extends SRx_Controller
 		
 		$this->layout->set_layout('layout/user/default');
 		$this->layout->view('panel/application/view' , $parse);	
+	}
+
+	public function welcome()
+	{
+		$user = $this->user_session->get_user();
+		$this->layout->set_layout('layout/user/default');
+		$this->layout->view('user/welcome', array('user'=>$user));
 	}
 
 	public function update()

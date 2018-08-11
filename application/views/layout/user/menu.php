@@ -11,6 +11,12 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li>
+                            <a class=" waves-effect waves-dark" href="<?php echo $base_url ?>user/welcome" aria-expanded="false">
+                                <i class="mdi mdi-account-multiple"></i>
+                                <span class="hide-menu">Welcome to Shaghaf</span>
+                            </a>
+                        </li>
+                        <li>
                             <a class=" waves-effect waves-dark" href="<?php echo $base_url ?>user/application" aria-expanded="false">
                                 <i class="mdi mdi-account-multiple"></i>
                                 <span class="hide-menu">My Application
