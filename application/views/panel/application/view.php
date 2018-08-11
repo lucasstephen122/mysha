@@ -156,7 +156,7 @@
 						<h4 class="card-title">
 							<small>End Date:</small>
 						</h4>
-						<input type="date" name="end_date" value="<?=date('Y-m-d', strtotime($user['end_date']))?>" class="form-control"/>
+						<input name="end_date" value="<?=date('Y-m-d H:i', strtotime($user['end_date']))?>" class="form-control" id="end_date"/>
 					</div>
                        
 						<div class="card-body">
@@ -779,7 +779,7 @@
 												</div>
 												<div class="col-lg-6">
 													<label for="adwards_title">Date</label>
-													<input type="text" class="form-control" name="adwards_date_<?=$index?>" placeholder="Date (D/M/YY)"  value="<?php echo $application['adwards_date_'.$index] ?>" aria-required="true" aria-invalid="false">	
+													<input type="text" class="form-control datepicker" name="adwards_date_<?=$index?>" placeholder="Date (D/M/YY)"  value="<?php echo $application['adwards_date_'.$index] ?>" aria-required="true" aria-invalid="false">	
 												</div>
 											</div>
 										</div>
@@ -1158,7 +1158,10 @@
 		}
 		function init_application()
 		{
-			$('#dob').datepicker({dateFormat: 'dd/mm/yy'});
+			// $('#dob').datepicker({dateFormat: 'dd/mm/yy'});
+			$('#end_date').bootstrapMaterialDatePicker({ format : 'YYYY:MM:DD HH:mm' });
+			$(".datepicker").datepicker({dateFormat: 'dd/mm/yy'});
+
 			$('#adwards_date').datepicker({dateFormat: 'dd/mm/yy'});
 			$('#btn_draft').click(function() {
 				action = 'draft';
@@ -1677,7 +1680,7 @@
 			html += 			"</div>";
 			html += 			"<div class='col-lg-6'>";
 			html += 				"<label>Date</label>";
-			html += 				"<input type='text' class='form-control'  name='adwards_date_"+new_index+"' placeholder='Date (D/M/YY)' aria-required='true' aria-invalid='false'>";
+			html += 				"<input type='text' class='form-control datepicker'  name='adwards_date_"+new_index+"' placeholder='Date (D/M/YY)' aria-required='true' aria-invalid='false'>";
 			html += 			"</div>";
 			html += 		"</div>";
 			html += 	"</div>";
@@ -1688,6 +1691,7 @@
 			html += 	"<hr>";
 			html += "</div>"
 			$("#adwards_form").append(html);
+			$(".datepicker").datepicker({dateFormat: 'dd/mm/yy'});
 		})
 		$("#works_new_entry").on("click",function(){	
 			var last_index = 0;

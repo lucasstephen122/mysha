@@ -74,6 +74,9 @@
     <script src="<?php echo $base_url; ?>assets/panel/admin/../assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
     <link href="<?php echo $base_url; ?>assets/panel/admin/../assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
 
+    <script src="<?php echo $base_url; ?>assets/panel/admin/../assets/node_modules/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
+    <link href="<?php echo $base_url; ?>assets/panel/admin/../assets/node_modules/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
+
 
     <script src="<?php echo $base_url; ?>assets/js/ib-functions.js"></script>
     <script src="<?php echo $base_url; ?>assets/js/ib-global.js"></script>
