@@ -53,13 +53,13 @@
                 </nav>
                 <!-- End Sidebar navigation -->
                 <?php if (!empty($total_second)): ?>
-                <label id="countdown" class="timer text-center" style="display:block;color:white;"></label>
+                <label id="countdown" class="timer text-center" style="display:block;color:white;"><?=$total_second<=0?'00:00:00:00':''?></label>
                 <?php endif; ?>
             </div>
             <!-- End Sidebar scroll-->
         </aside>
 
-<?php if (!empty($total_second)): ?>
+<?php if (!empty($total_second) && $total_second>0): ?>
 <script>
 var seconds = <?= $total_second ?>;
 function timer() {

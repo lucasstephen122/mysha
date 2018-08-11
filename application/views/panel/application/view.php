@@ -152,12 +152,14 @@
 					</div>
 					<hr>
 					<div>
+					<?php if ($type === 'admin'): ?>
 					<div class="card-body">
 						<h4 class="card-title">
 							<small>End Date:</small>
 						</h4>
 						<input name="end_date" value="<?=date('Y-m-d H:i', strtotime($user['end_date']))?>" class="form-control" id="end_date"/>
 					</div>
+					<?php endif; ?>
                        
 						<div class="card-body">
 							<div class="row">
