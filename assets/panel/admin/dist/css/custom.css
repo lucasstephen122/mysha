@@ -1,0 +1,89 @@
+.participant-status{
+    background : darkgray;
+    padding: 40px;
+    color: black;
+}
+.admin-email-input {
+    background: transparent;
+    font-size : 24px;
+    border: none;
+    border-radius: 0;
+    border-bottom: 1px solid #000;
+    box-shadow: none;
+}
+.admins-list .admin-list-item , .participants-list .participant-list-item {
+    padding: 20px;
+    border :1px solid darkgray;
+    margin: 10px;
+}
+.participants-list.no-border .participant-list-item  {
+    border: none !important;
+}
+.admins-list .admin-list-item .admin-info h4  , .participants-list .participant-list-item .participant-info h4{
+    color: #000000;
+}
+.admins-list .admin-list-item .admin-profile-image, 
+.participants-list .participant-list-item .participant-profile-image
+ {
+    width: 100px;
+    border-radius: 50%;
+}
+.admins-list .admin-list-item .admin-roles  {
+    margin-left: auto;
+    color: #000;
+}
+.participants-list .participant-actions {
+    margin-left: auto;
+}
+.participants-list .participant-list-item .participant-actions input {
+    background: darkgray;
+}
+.app-search {
+    background : lightgray;
+    padding-bottom: 30px;
+}
+.app-search .filter-search {
+    background: #fff;
+    padding-top: 40px;
+    padding-left: 15px;
+    padding-bottom: 10px;
+}
+.app-search .filter-search label {
+    padding-left: 20px;
+}
+.app-search .filter-search select {
+    font-size : 24px;
+    border: none;
+}
+.search-box .app-search input {
+    background: lightgray;
+    border: none;
+}
+.search-box .app-search .srh-btn {
+    color: #000;
+    background: transparent
+}
+.msg-reply {
+    text-align: right;
+   
+}
+.message-box{
+    border : 1px solid #e9ecef;
+    margin : 20px 0 ;
+    
+}
+.site-logo {
+    margin-bottom: 20px;
+}
+.btn-primary {
+    background-color  : #DA396D !important;
+    border : none !important; 
+}
+.left-sidebar-header {
+    text-align: center;
+    background-color: #fff !important;
+    height: 66px;
+}
+.left-sidebar-header span {
+    margin:0 auto;
+}
