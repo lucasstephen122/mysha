@@ -49,6 +49,39 @@
 				return false;
 		}
 
+		public function sendSMSJson($jsonObj)
+		{
+			$jsonObj['msg'] = $this->convertToUnicode($jsonObj['msg']);
+			$jsonObj['sender'] = urlencode($jsonObj['sender']);
+			$url = "http://www.mobily.ws/api/msgSend.php";
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL, $url);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($ch, CURLOPT_HEADER, 0);
+			curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+			curl_setopt($ch, CURLOPT_POST, 1);
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+			curl_setopt($ch, CURLOPT_POSTFIELDS,json_encode($jsonObj));
+			$result = curl_exec($ch);
+			$result = json_decode($result, true);
+			return $result;
+		}
+		
+		public function sendSMS($number, $msg)
+		{
+			$jsonObj = [
+				'apiKey' => '47a6d4bcd823596155357c3eac888472',
+				'sender'=>'ShaghafProg',
+				'applicationType' => 68,
+				'numbers' => $number,
+				'msg' => $msg,
+				'msgId' => rand(1,99999),
+				'timeSend' => '0',
+				'dateSend' => '0'
+			];
+			return $this->sendSMSJson($jsonObj);
+		}
+
 		private function convertToUnicode($message)
 		{
 			$chrArray[0] = "،";
@@ -568,6 +601,19 @@
 			$body = $this->ci->util->parse($body , $parse);
 
 			return $this->send_email($tos , $subject , $body , $attachments);
+		}
+
+		public function send_template_sms($user , $template)
+		{
+			Logger::log('email.send' , '--------------------------------------');
+			Logger::log('email.send' , 'Template Email : '.$template);
+			Logger::log('email.send' , $user);
+			
+			global $config;
+			$body = file_get_contents($config['root_dir'].'/assets/templates/'.$template.'.html');
+			$body = $this->ci->util->parse($body , $user);
+
+			return $this->sendSMS($user['phone'], $body);
 		}
 
 		public function send_template_bcc_email($bcc , $subject , $template , $parse , $attachments = array())
