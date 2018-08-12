@@ -229,151 +229,141 @@
 										This is personal desc panel , in this section you need to enter these data to system be able to register you.
 									</div>
 								</div>
-                                <div class="row">
-									<div class="col-lg-6">
-										<div class="form-group">
-											<label for="education_country">Country*</label>
-											<select id="education_country" class='form-control' name="education_country">
-												<?php foreach($countries as $country):?>
-													<option value="<?=$country['id']?>" <?php echo $application["education_country"]==$country['id']?"selected":"" ?> ><?=$country['name']?></option>
-												<?php endforeach?>
-											</select>
-										</div>
-									</div>
-									<div class="col-lg-6">
-										<div class="form-group">
-											<label for="highest_qualification">Highest Acedemic Qualificatoin</label>
-											<input type="text" class="form-control" id="highest_qualification" name="highest_qualification" placeholder="Highest Acedemic Qualificatoin" value="<?php echo $application['highest_qualification'] ?>">
-										</div>
-									</div>
-                            	</div>
-								 
-								<div class="row">
-									<div class="col-lg-4">	
-										<div class="form-group">
-											<label for="bachelor_degree">Bachelor's Degree</label>
-											<input type="text" class="form-control" id="bachelor_degree" name="bachelor_degree" placeholder="Bachelor's Degree" value="<?php echo $application['bachelor_degree'] ?>">
-										</div>
-									</div>
-									<div class="col-lg-4">
-										<div class="form-group">
-											<label for="bachelor_university_id">Bachelor's University</label>
-											<select id="bachelor_university_id" class='form-control' name="bachelor_university_id">
-												<option value='0'></option>
-												<?php foreach($universities as $university):?>
-													<option value="<?=$university['id']?>" <?php echo $application["bachelor_university_id"]==$university['id']?"selected":"" ?> ><?=$university['name']?></option>
-												<?php endforeach?>
-												<option value='-1' <?php echo $application["bachelor_university_id"]==-1 ? "selected":"" ?> >Input Manually</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-lg-4">
-										<div class="form-group <?php echo $application["bachelor_university_id"] != -1 ?'hidden':''?>" id="bachelor_university_container">
-												<label for="bachelor_university">Bachelor's University Name</label>
-												<input type="text" class="form-control" id="bachelor_university" name="bachelor_university" placeholder="Bachelor's University Name" value="<?php echo $application['bachelor_university'] ?>">
-										</div>
-									</div>
+								<div style='border-bottom:1px solid #ccc;'>
+									<ul class="nav nav-tabs profile-tab" role="tablist" style='width:300px;margin:0 auto'>
+										<li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#bachelor_pane" role="tab">Bachelor's Degree  </a> </li>
+										<li class="nav-item"> <a class="nav-link " data-toggle="tab" href="#master_pane" role="tab">Master Degree </a> </li>
+									</ul>
 								</div>
-								 
-								<div class="row">
-									<div class="col-lg-4">
-										<div class="form-group">
-											<label for="bachelor_university_address">University Location</label>
-											<input type="text" class="form-control" id="bachelor_university_address" name="bachelor_university_address" placeholder="University Location" value="<?php echo $application['bachelor_university_address'] ?>">
+								<div class='tab-content'>
+									<div class='tab-pane active' id="bachelor_pane" role="tabpanel" style='padding:20px;'>
+										<div class="row">
+											<div class="col-lg-4">	
+												<div class="form-group">
+													<label for="bachelor_degree">Bachelor's Degree</label>
+													<input type="text" class="form-control" id="bachelor_degree" name="bachelor_degree" placeholder="Bachelor's Degree" value="<?php echo $application['bachelor_degree'] ?>">
+												</div>
+											</div>
+											<div class="col-lg-4">
+												<div class="form-group">
+													<label for="bachelor_university_id">Bachelor's University</label>
+													<select id="bachelor_university_id" class='form-control' name="bachelor_university_id">
+														<option value='0'></option>
+														<?php foreach($universities as $university):?>
+															<option value="<?=$university['id']?>" <?php echo $application["bachelor_university_id"]==$university['id']?"selected":"" ?> ><?=$university['name']?></option>
+														<?php endforeach?>
+														<option value='-1' <?php echo $application["bachelor_university_id"]==-1 ? "selected":"" ?> >Input Manually</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-lg-4">
+												<div class="form-group <?php echo $application["bachelor_university_id"] != -1 ?'hidden':''?>" id="bachelor_university_container">
+														<label for="bachelor_university">Bachelor's University Name</label>
+														<input type="text" class="form-control" id="bachelor_university" name="bachelor_university" placeholder="Bachelor's University Name" value="<?php echo $application['bachelor_university'] ?>">
+												</div>
+											</div>
+										</div>
+										
+										<div class="row">
+											<div class="col-lg-4">
+												<div class="form-group">
+													<label for="bachelor_university_address">University Location</label>
+													<input type="text" class="form-control" id="bachelor_university_address" name="bachelor_university_address" placeholder="University Location" value="<?php echo $application['bachelor_university_address'] ?>">
+												</div>
+											</div>
+											<div class="col-lg-4">
+												<div class="form-group">
+													<label for="bachelor_enrollment">Period of enrollment</label>
+													<input type="text" class="form-control"  id="bachelor_enrollment" name="bachelor_enrollment" placeholder="mm/yyyy - mm/yyyy, or present" value="<?php echo $application['bachelor_enrollment'] ?>">
+												</div>
+											</div>
+											<div class="col-lg-4">
+												<div class="form-group">
+													<label for="bachelor_major">Bachelor's Major (& Minor)</label>
+													<input type="text" class="form-control" id="bachelor_major" name="bachelor_major" placeholder="Bachelor's Major (& Minor)" value="<?php echo $application['bachelor_major'] ?>">
+												</div>
+											</div>
+											
+										</div>
+										
+										<div class="row">
+											<div class="col-lg-6">
+												<div class="form-group">
+													<label for="bachelor_gpa">Bachelor's final GPA</label>
+													<input type="text" class="form-control" id="bachelor_gpa" name="bachelor_gpa" placeholder="Bachelor's final GPA" value="<?php echo $application['bachelor_gpa'] ?>">
+												</div>
+											</div>
+											<div class="col-lg-6">
+												<div class="form-group">
+													<label for="undergraduate_ranking">Undergraduate Final Year Student Ranking</label>
+													<input type="text" class="form-control" id="undergraduate_ranking" name="undergraduate_ranking" placeholder="Ranking" value="<?php echo $application['undergraduate_ranking'] ?>">
+												</div>
+											</div>
 										</div>
 									</div>
-									<div class="col-lg-4">
-										<div class="form-group">
-											<label for="bachelor_enrollment">Period of enrollment</label>
-											<input type="text" class="form-control"  id="bachelor_enrollment" name="bachelor_enrollment" placeholder="mm/yyyy - mm/yyyy, or present" value="<?php echo $application['bachelor_enrollment'] ?>">
+									<div class='tab-pane' id="master_pane" role="tabpanel" style='padding:20px;'>
+										<div class="row">
+											<div class="col-lg-12">
+												<div class="form-group">
+													<label for="graduate_degree">Graduate Degree</label>
+													<input type="text" class="form-control" id="graduate_degree" name="graduate_degree" placeholder="Graduate Degree" value="<?php echo $application['graduate_degree'] ?>">
+												</div>
+											</div>
 										</div>
-									</div>
-									<div class="col-lg-4">
-										<div class="form-group">
-											<label for="bachelor_major">Bachelor's Major (& Minor)</label>
-											<input type="text" class="form-control" id="bachelor_major" name="bachelor_major" placeholder="Bachelor's Major (& Minor)" value="<?php echo $application['bachelor_major'] ?>">
+										<div class="row">
+											<div class="col-lg-4">
+												<div class="form-group">
+													<label for="graduate_university_id">Graduate University</label>
+													<select id="graduate_university_id" class='form-control' name="graduate_university_id">
+														<option value='0'></option>
+														<?php foreach($universities as $university):?>
+															<option value="<?=$university['id']?>" <?php echo $application["graduate_university_id"]==$university['id']?"selected":"" ?> ><?=$university['name']?></option>
+														<?php endforeach?>
+														<option value="-1" <?php echo $application["graduate_university_id"]==-1 ? "selected":"" ?>>Input Manually</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-lg-4 <?php echo $application["graduate_university_id"] != -1 ?'hidden':''?>" id="graduate_university_container">
+												<div class="form-group" id="graduate_university_container">
+													<label for="graduate_university">Graduate University Name</label>
+													<input type="text" class="form-control" id="graduate_university" name="graduate_university" placeholder="Graduate University Name" value="<?php echo $application['graduate_university'] ?>">
+												</div>
+											</div>
+											<div class="col-lg-4">
+												<div class="form-group">
+													<label for="graduate_university_address">University Location</label>
+													<input type="text" class="form-control" id="graduate_university_address" name="graduate_university_address" placeholder="University Location" value="<?php echo $application['graduate_university_address'] ?>">
+												</div>
+											</div>
+											
 										</div>
-									</div>
-									
-								</div>
-								 
-								<div class="row">
-									<div class="col-lg-6">
-										<div class="form-group">
-											<label for="bachelor_gpa">Bachelor's final GPA</label>
-											<input type="text" class="form-control" id="bachelor_gpa" name="bachelor_gpa" placeholder="Bachelor's final GPA" value="<?php echo $application['bachelor_gpa'] ?>">
+										<div class="row">
+											<div class="col-lg-4">
+												<div class="form-group">
+													<label for="graduate_enrollment">Period of enrollment</label>
+													<input type="text" class="form-control date-range" id="graduate_enrollment" name="graduate_enrollment" placeholder="mm/yyyy - mm/yyyy, or present" value="<?php echo $application['graduate_enrollment'] ?>">
+												</div>
+											</div>
+											<div class="col-lg-4">
+												<div class="form-group">
+													<label for="graduate_major">Graduate Emphasis</label>
+													<input type="text" class="form-control" id="graduate_major" name="graduate_major" placeholder="Graduate Emphasis" value="<?php echo $application['graduate_major'] ?>">
+												</div>
+											</div>
+											<div class="col-lg-4">
+												<div class="form-group">
+													<label for="graduate_gpa">Graduate final GPA</label>
+													<input type="text" class="form-control" id="graduate_gpa" name="graduate_gpa" placeholder="Graduate final GPA" value="<?php echo $application['graduate_gpa'] ?>">
+												</div>
+											</div>
 										</div>
-									</div>
-									<div class="col-lg-6">
-										<div class="form-group">
-											<label for="undergraduate_ranking">Undergraduate Final Year Student Ranking</label>
-											<input type="text" class="form-control" id="undergraduate_ranking" name="undergraduate_ranking" placeholder="Ranking" value="<?php echo $application['undergraduate_ranking'] ?>">
-										</div>
-									</div>
-								</div>
-								
-								<hr>
-								
-								<div class="row">
-									<div class="col-lg-12">
-										<div class="form-group">
-											<label for="graduate_degree">Graduate Degree</label>
-											<input type="text" class="form-control" id="graduate_degree" name="graduate_degree" placeholder="Graduate Degree" value="<?php echo $application['graduate_degree'] ?>">
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-4">
-										<div class="form-group">
-											<label for="graduate_university_id">Graduate University</label>
-											<select id="graduate_university_id" class='form-control' name="graduate_university_id">
-												<option value='0'></option>
-												<?php foreach($universities as $university):?>
-													<option value="<?=$university['id']?>" <?php echo $application["graduate_university_id"]==$university['id']?"selected":"" ?> ><?=$university['name']?></option>
-												<?php endforeach?>
-												<option value="-1" <?php echo $application["graduate_university_id"]==-1 ? "selected":"" ?>>Input Manually</option>
-											</select>
-										</div>
-									</div>
-									<div class="col-lg-4 <?php echo $application["graduate_university_id"] != -1 ?'hidden':''?>" id="graduate_university_container">
-										<div class="form-group" id="graduate_university_container">
-											<label for="graduate_university">Graduate University Name</label>
-											<input type="text" class="form-control" id="graduate_university" name="graduate_university" placeholder="Graduate University Name" value="<?php echo $application['graduate_university'] ?>">
-										</div>
-									</div>
-									<div class="col-lg-4">
-										<div class="form-group">
-											<label for="graduate_university_address">University Location</label>
-											<input type="text" class="form-control" id="graduate_university_address" name="graduate_university_address" placeholder="University Location" value="<?php echo $application['graduate_university_address'] ?>">
-										</div>
-									</div>
-									
-								</div>
-								<div class="row">
-									<div class="col-lg-4">
-										<div class="form-group">
-											<label for="graduate_enrollment">Period of enrollment</label>
-											<input type="text" class="form-control date-range" id="graduate_enrollment" name="graduate_enrollment" placeholder="mm/yyyy - mm/yyyy, or present" value="<?php echo $application['graduate_enrollment'] ?>">
-										</div>
-									</div>
-									<div class="col-lg-4">
-										<div class="form-group">
-											<label for="graduate_major">Graduate Emphasis</label>
-											<input type="text" class="form-control" id="graduate_major" name="graduate_major" placeholder="Graduate Emphasis" value="<?php echo $application['graduate_major'] ?>">
-										</div>
-									</div>
-									<div class="col-lg-4">
-										<div class="form-group">
-											<label for="graduate_gpa">Graduate final GPA</label>
-											<input type="text" class="form-control" id="graduate_gpa" name="graduate_gpa" placeholder="Graduate final GPA" value="<?php echo $application['graduate_gpa'] ?>">
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-lg-12">
-										<div class="form-group">
-											<label for="graduate_ranking">Graduate Final Year Student Ranking</label>
-											<input type="text" class="form-control" id="graduate_ranking" name="graduate_ranking" placeholder="Ranking" value="<?php echo $application['graduate_ranking'] ?>">
+										<div class="row">
+											<div class="col-lg-12">
+												<div class="form-group">
+													<label for="graduate_ranking">Graduate Final Year Student Ranking</label>
+													<input type="text" class="form-control" id="graduate_ranking" name="graduate_ranking" placeholder="Ranking" value="<?php echo $application['graduate_ranking'] ?>">
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -516,7 +506,13 @@
 									<div class="col-lg-6">
 										<div class="form-group">
 											<label for="work">Number of years of work experience if applicable:</label>
-											<input type="text" class="form-control" id="work" name="work" placeholder="Years" value="<?php echo $application['work'] ?>">
+											<select class='form-control' id="work" name="work">
+												<option value="0" <?php if($application["work"] == '0')echo "selected";?> >0</option>
+												<option value="1" <?php if($application["work"] == '1')echo "selected";?>>1</option>
+												<option value="2" <?php if($application["work"] == '2')echo "selected";?>>2</option>
+												<option value="3" <?php if($application["work"] == '3')echo "selected";?>>3</option>
+												<option value="3+" <?php if($application["work"] == "3+")echo "selected";?>>3+</option>
+											</select>
 										</div>
 									</div>
 									<div class="col-lg-6">
@@ -564,14 +560,7 @@
 												<div class="col-lg-4">
 													<div class="form-group">
 														<label>Employment Period</label>
-														<select class='form-control' name="work_period_<?php echo $i; ?>">
-															<option value="0" <?php echo $application['work_period_'.$i]=='0'?"selected":""?> >0</option>
-															<option value="1" <?php echo $application['work_period_'.$i]=='1'?"selected":""?>>1</option>
-															<option value="2" <?php echo $application['work_period_'.$i]=='2'?"selected":""?>>2</option>
-															<option value="3" <?php echo $application['work_period_'.$i]=='3'?"selected":""?>>3</option>
-															<option value="3+" <?php echo $application['work_period_'.$i]=='3+'?"selected":""?>>3+</option>
-														</select>
-														</select>
+														<input type="text" class="form-control" id="work_period_<?php echo $i; ?>" name="work_period_<?php echo $i; ?>" value="<?php echo $application['work_period_'.$i] ?>">
 													</div>
 												</div>
 												<div class="col-lg-4">
@@ -586,7 +575,12 @@
 															<a  class="remove_works pull-right" data-index="<?=$i?>" onclick='removeWorks($(this))'><i class="fa fa-minus-circle" ></i></a>
 														<?php endif?>
 														<label>Location <small>(City, Country)</small></label>
-														<input type="text" class="form-control" name="work_location_<?php echo $i; ?>" value="<?php echo $application['work_location_'.$i] ?>">
+														<select id="education_country" class='form-control' name="work_location_<?php echo $i; ?>">
+															<option value="0" <?php echo $application['work_location_'.$i] == 0?"selected":"" ?>></option>
+															<?php foreach($countries as $country):?>
+																<option value="<?=$country['id']?>" <?php echo $application['work_location_'.$i] == $country['id']?"selected":"" ?> ><?=$country['name']?></option>
+															<?php endforeach?>
+														</select>
 													</div>
 												</div>
 											</div>
@@ -1037,7 +1031,14 @@
 <!-- ============================================================== -->
 <!-- End Page wrapper  -->
 <!-- ============================================================== -->
-
+<div style="display:none">
+	<select id="country_list" class='form-control'>
+		<option value="0"></option>
+		<?php foreach($countries as $country):?>	
+			<option value="<?=$country['id']?>" ><?=$country['name']?></option>
+		<?php endforeach?>
+	</select>
+</div>
 <script>
 	var action = 'draft'; 
 	var adwards_indexes = $("#adwards_index").val();
@@ -1191,6 +1192,9 @@
 			init_daterangepicker($('#graduate_enrollment'));
 			activity_indexes_array.forEach(function(value){
 				init_daterangepicker($('#extra_period_'+value));
+			})
+			works_indexes_array.forEach(function(value){
+				init_daterangepicker($('#work_period_'+value));
 			})
 			$('#btn_submit').click(function() {
 				action = 'submit';
@@ -1663,15 +1667,23 @@
 		$("#bachelor_university_id").on("change",function(){
 			if($(this).val() == -1){
 				$("#bachelor_university_container").show();
+				$("#bachelor_university_address").val("");
+			}else if($(this).val() == 0){
+				$("#bachelor_university_address").val("");
 			}else{
 				$("#bachelor_university_container").hide();
+				$("#bachelor_university_address").val("Saudi Arabia");
 			}
 		})
 		$("#graduate_university_id").on("change",function(){
 			if($(this).val() == -1){
 				$("#graduate_university_container").show();
+				$("#graduate_university_address").val("");
+			}else if($(this).val() == 0){
+				$("#graduate_university_address").val("");
 			}else{
 				$("#graduate_university_container").hide();
+				$("#graduate_university_address").val("Saudi Arabia");
 			}
 		})
 		
@@ -1721,6 +1733,10 @@
 			var new_index = last_index + 1;
 			works_indexes_array.push(new_index);
 			$("#works_index").val(works_indexes_array.join(","));
+			
+			$("#country_list").attr("name","work_location_"+new_index);
+			var location_template = document.getElementById("country_list").outerHTML;
+
 			var html = "";
 
 			html +="<div class='works'>";
@@ -1730,13 +1746,7 @@
 			html +=				"<div class='col-lg-4'>";
 			html +=					"<div class='form-group'>";
 			html +=						"<label>Employment Period</label>";
-			html +=						"<select class='form-control' name='work_period_"+new_index+"'>";
-			html +=							"<option value='0' >0</option>";
-			html +=							"<option value='1' >1</option>";
-			html +=							"<option value='2' >2</option>";
-			html +=							"<option value='3' >3</option>";
-			html +=							"<option value='3+'>3+</option>";
-			html +=						"</select>";
+			html +=						"<input class='form-control' id='work_period_"+new_index+"' name='work_period_"+new_index+"' >";
 			html +=					"</div>";
 			html +=					"</div>";
 			html +=				"<div class='col-lg-4'>";
@@ -1749,7 +1759,7 @@
 			html +=					"<div class='form-group'>";
 			html +=						"<a  class='remove_works pull-right' data-index='"+new_index+"' onclick='removeWorks($(this))'><i class='fa fa-minus-circle' 							></i></a>";
 			html +=						"<label>Location <small>(City, Country)</small></label>";
-			html +=						"<input type='text' class='form-control' name='work_location_"+new_index+"'>";
+			html +=						location_template;
 			html +=					"</div>";
 			html +=				"</div>";
 			html +=			"</div>";
@@ -1766,6 +1776,7 @@
 			html +=	"</div>";
 			html +="</div>"
 			$("#works_form").append(html);
+			init_daterangepicker($("#work_period_"+new_index))
 		})
 
 		$("#activity_new_entry").on("click",function(){	
