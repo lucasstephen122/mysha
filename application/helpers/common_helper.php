@@ -1042,11 +1042,12 @@
 
     function getRemainingSeconds($user)
     {
-        if (empty($user['end_date'])) {
+        $end_date = get_end_date();
+        if (empty($end_date)) {
             return NULL;
         }
         $timeFirst  = strtotime(date('Y-m-d H:i'));
-        $timeSecond = strtotime($user['end_date']);
+        $timeSecond = strtotime($end_date);
         $differenceInSeconds = $timeSecond - $timeFirst;
 
         return $differenceInSeconds;
@@ -1149,4 +1150,11 @@
         foreach ($array as $line) {
             fputcsv($f, $line, $delimiter);
         }
+    }
+
+    function get_end_date()
+    {
+		$setting_service = Factory::get_service('setting_service');
+        $settings = $setting_service->get_settings();
+        return $settings['end-date'];
     }

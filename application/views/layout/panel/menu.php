@@ -99,6 +99,13 @@
                                 </span>
                             </a>
                         </li>
+                        
+                        <li>
+                            <a class=" waves-effect waves-dark" href="<?php echo $base_url ?>panel/admin/setting" aria-expanded="false">
+                                <i class="fa fa-align-justify"></i>
+                                <span class="hide-menu">Settings</span>
+                            </a>
+                        </li>
                         <?php } ?>
                     </ul>
                 </nav>

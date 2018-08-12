@@ -173,14 +173,6 @@
 					</div>
 					<hr>
 					<div>
-					<?php if ($type === 'admin'): ?>
-					<div class="card-body">
-						<h4 class="card-title">
-							<small>End Date:</small>
-						</h4>
-						<input name="end_date" value="<?=date('Y-m-d H:i', strtotime($user['end_date']))?>" class="form-control" id="end_date"/>
-					</div>
-					<?php endif; ?>
                        
 						<div class="card-body">
 							<div class="row">
@@ -1178,17 +1170,6 @@
 		function init_application()
 		{
 			$('#dob').datepicker({dateFormat: 'dd/mm/yy'});
-			
-			<?php if($type == "admin"):?>
-				$('#end_date').datetimepicker({ 
-					format : 'yyyy-mm-dd hh:ii',
-					autoclose: true,
-					todayBtn: true,
-					pickerPosition: "top-left",
-					startDate: "2013-02-14 10:00",
-					minuteStep: 5
-				});
-			<?php endif ?>
 			$(".datepicker").datepicker({dateFormat: 'dd/mm/yy'});
 
 			$('#adwards_date').datepicker({dateFormat: 'dd/mm/yy'});

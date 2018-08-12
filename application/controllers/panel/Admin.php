@@ -27,6 +27,9 @@ class Admin extends SRx_Controller
 		$application = $this->input->get_string('application');
 		$setting_service->save('application' , $application);
 
+		$end_date = $this->input->get_string('end_date');
+		$setting_service->save('end-date' , $end_date);
+
 		set_success_message('Settings saved successfully');
 		$this->redirect('panel/admin/setting');	
 	}
