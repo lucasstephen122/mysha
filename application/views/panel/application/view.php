@@ -29,6 +29,11 @@
 		box-shadow:2px 2px 4px #ccc;
 		padding:15px;
 	}
+	.form-control.datepicker{
+	    padding:0px;
+	    padding-left:5px;
+	    box-shadow:none;
+	}
 	.date-picker-wrapper{
 		z-index:1000;
 	}
