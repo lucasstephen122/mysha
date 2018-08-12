@@ -132,7 +132,7 @@ class User extends SRx_Controller
 		$this->user_session->put_session('user' , $user);
 
 		$this->notification_library->send_template_emails([$user['email']] , 'Login credentials for program' , 'signup' , $user);
-		$this->notification_library->send_template_sms($user, 'signup');
+		$this->notification_library->send_template_sms($user, 'sms_signup');
 
 		$this->layout->view('user/success');
 	}
