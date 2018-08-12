@@ -163,7 +163,10 @@
 						break;						
 					case User_search_criteria::$BACHELOR_DEGREE :
 						$query['AND'][] = ['bachelor_degree' => ['operator' => 'LIKE' , 'value' => $value]];
-						break;							
+						break;						
+					case User_search_criteria::$GRADUATE_DEGREE :
+						$query['AND'][] = ['graduate_degree' => ['operator' => 'LIKE' , 'value' => $value]];
+						break;
 					case User_search_criteria::$PROGRESS_NE :
 						$query['AND'][] = ['progress' => ['operator' => 'NE' , 'value' => $value]];
 						break;						
@@ -241,6 +244,7 @@
 		public static $REGION = "region";
 		public static $WORK = "work";
 		public static $BACHELOR_DEGREE = "bachelor_degree";
+		public static $GRADUATE_DEGREE = "graduate_degree";
 		public static $PROGRESS_NE = "progress_ne";
 	}
 

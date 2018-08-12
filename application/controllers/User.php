@@ -219,6 +219,7 @@ class User extends SRx_Controller
 
 		$user['work'] = $this->input->get_string('work');	
 		$user['bachelor_degree'] = $this->input->get_string('bachelor_degree');
+		$user['graduate_degree'] = $this->input->get_string('graduate_degree');
 
 		$user['application'] = $_REQUEST;
 

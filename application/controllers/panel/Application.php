@@ -13,7 +13,7 @@ class Application extends SRx_Controller
 	public function index()
 	{
 		if(!$this->app_library->is_role_session('admin')) {
-			$this->redirect('panel/application/listing');
+			$this->redirect('panel/application/listing/draft');
 		}
 
 		$user_service = Factory::get_service('user_service');
@@ -263,7 +263,7 @@ class Application extends SRx_Controller
 
 		$bachelor_degree = $this->input->get_string('bachelor_degree');
 		if($bachelor_degree)
-			$criteria->add_criteria(User_search_criteria::$BACHELOR_DEGREE , $bachelor_degree);
+			$criteria->add_criteria(User_search_criteria::$GRADUATE_DEGREE , $bachelor_degree);
 
 		if($app_status == "all"){
 			$status = $this->input->get_string('status');
@@ -457,6 +457,7 @@ class Application extends SRx_Controller
 
 		$user['work'] = $this->input->get_string('work');	
 		$user['bachelor_degree'] = $this->input->get_string('bachelor_degree');
+		$user['graduate_degree'] = $this->input->get_string('graduate_degree');
 
 		$user['application'] = $_REQUEST;
 		if($this->input->get_string('status')) {
