@@ -2,7 +2,7 @@
 ?>
 <div class="page-wrapper">
     <div class="container-fluid">
-        <div class="col-lg-6 offset-lg-3" style="margin-top:60px;">
+        <div class="col-lg-10 offset-lg-1" style="margin-top:60px;">
             <div class="card">
                 <div class="card-body">
                     <form id="frm_application" name="frm_application" action="<?= $base_url.'user/comment/uc' ?>" method="POST">

@@ -66,7 +66,7 @@
 			if($public) {
 				$data['public'] = $public;
 			}
-			$comments =  $this->connector->gets(Table::$comments , $data);
+			$comments =  $this->connector->gets(Table::$comments , $data, array('auto_id'=>''));
 			$comments = $this->decode($comments , true);
 			return $comments;
 		}
