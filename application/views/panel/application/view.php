@@ -29,6 +29,9 @@
 		box-shadow:2px 2px 4px #ccc;
 		padding:15px;
 	}
+	.date-picker-wrapper{
+		z-index:1000;
+	}
 </style>
 <!-- ============================================================== -->
 <!-- Page wrapper  -->
@@ -1164,7 +1167,7 @@
 				format: 'MM/DD/YYYY',
 				autoClose: false,
 				monthSelect: true,
-    			yearSelect: [1900, moment().get('year')]
+				yearSelect: [1900, moment().get('year')],
 			});
 		}
 		function init_application()

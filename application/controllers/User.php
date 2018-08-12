@@ -304,6 +304,7 @@ class User extends SRx_Controller
 		
 		$reviewers = $user_service->getReviewers();
 		foreach($reviewers as $reviewer){
+			$reviewer["comment"] = $this->input->get_required_string('comment');
 			$this->notification_library->send_template_emails([$reviewer['email']] , 'User sent comment' , 'user_comment' , $reviewer);
 		}
 
