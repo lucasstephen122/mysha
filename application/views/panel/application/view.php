@@ -1169,16 +1169,17 @@
 		function init_application()
 		{
 			$('#dob').datepicker({dateFormat: 'dd/mm/yy'});
-
-			$('#end_date').datetimepicker({ 
-				format : 'yyyy-mm-dd hh:ii',
-				autoclose: true,
-				todayBtn: true,
-				pickerPosition: "top-left",
-				startDate: "2013-02-14 10:00",
-				minuteStep: 5
-			});
-
+			
+			<?php if($type == "admin"):?>
+				$('#end_date').datetimepicker({ 
+					format : 'yyyy-mm-dd hh:ii',
+					autoclose: true,
+					todayBtn: true,
+					pickerPosition: "top-left",
+					startDate: "2013-02-14 10:00",
+					minuteStep: 5
+				});
+			<?php endif ?>
 			$(".datepicker").datepicker({dateFormat: 'dd/mm/yy'});
 
 			$('#adwards_date').datepicker({dateFormat: 'dd/mm/yy'});

@@ -388,10 +388,10 @@ class Application extends SRx_Controller
 		$comment_service = Factory::get_service('comment_service');
 		$comments = $comment_service->get_user_comments($user_id);
 
-		$country_service = Factory::get_service('country_service');
+		$country_service = Factory::get_service('Country_service');
 		$countries = $country_service->get_countries();
 
-		$university_service = Factory::get_service('university_service');
+		$university_service = Factory::get_service('University_service');
 		$universities = $university_service->get_universities();
 
 		$parse = array();
