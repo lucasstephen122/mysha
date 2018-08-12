@@ -213,6 +213,12 @@
             $reviewers = $this->connector->get_rows();
             return $reviewers;
 		}
+		public function getAdmins(){
+			$query = 'SELECT * FROM '.Table::$users." WHERE `type`='admin' and `role`='admin' ";
+			$this->connector->query($query);
+            $reviewers = $this->connector->get_rows();
+            return $reviewers;
+		}
 	}
 
 	class User_search_criteria

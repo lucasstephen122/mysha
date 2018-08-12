@@ -33,29 +33,18 @@
                 </div>
             </div>
             <div class="card-body collapse">
-                  <form style="margin-top: 25px" id="" class="" method="GET" action="">
-                      <div class="row">
-                          <div class="col-lg-4"><div class="filter-search">
-                        <div class="form-group">
-                            <label> First Name  </label>
-                            <input type="text" class="form-control" name="first_name" value="<?php echo $filter['first_name'] ?>">
-                        </div>
-                    </div></div>
-                          <div class="col-lg-4"><div class="filter-search">
-                        <div class="form-group">
-                            <label> Last Name  </label>
-                            <input type="text" class="form-control" name="last_name" value="<?php echo $filter['last_name'] ?>">
-                        </div>
-                    </div></div>
-                          <div class="col-lg-4"><div class="filter-search">
-                        <div class="form-group">
-                            <label> Region  </label>
-                            <input type="text" class="form-control" name="region" value="<?php echo $filter['region'] ?>">
-                        </div>
-                    </div></div>
-                          
-                      </div>
+            <form style="margin-top: 25px" id="" class="" method="GET" action="">
             <div class="row">
+                <?php if($app_status == "all"):?>
+                    <div class="col-lg-4">
+                        <div class="filter-search">
+                            <div class="form-group">
+                                <label> Application Number  </label>
+                                <input type="text" class="form-control" name="number" value="<?php echo $filter['number'] ?>">
+                            </div>
+                        </div>
+                    </div>
+                <?php endif?>
                 <div class="col-lg-4 pr-3">
                     <div class="filter-search">
                         <div class="form-group">
@@ -101,62 +90,20 @@
                         </div>
                     </div>
                 </div>
-                 <div class="col-lg-4">
-                    <div class="filter-search">
-                        <div class="form-group">
-                            <label> Completion Status  </label>
-                              <select class="form-control" name="progress">
-                                <option value="">- Select -</option>  
-                                <option value="incomplete" <?php echo $filter['progress'] == 'incomplete' ? 'selected' : '' ?>> Un-Completed </option>
-                                <option value="completed" <?php echo $filter['progress'] == 'completed' ? 'selected' : '' ?>> Completed </option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 pr-3">
-                    <div class="filter-search">
-                        <div class="form-group">
-                            <label> Gender </label>
-                            <select class="form-control" name="gender">
-                                <option value="">- Select -</option>
-                                <option value="Male" <?php echo $filter['gender'] == 'Male' ? 'selected' : '' ?>> Male </option>
-                                <option value="Female" <?php echo $filter['gender'] == 'Female' ? 'selected' : '' ?>> Female </option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
+                <?php if($app_status == "all"):?>
                 <div class="col-lg-4 pr-3">
                     <div class="filter-search">
                         <div class="form-group">
                             <label> Application Status </label>
                             <select class="form-control" name="status">
                                 <option value="">- Select -</option>
-                                <?php if($this->app_library->is_role_session('admin')) { ?>
                                 <option value="draft" <?php echo $filter['status'] == 'draft' ? 'selected' : '' ?>>Draft</option>
                                 <option value="submitted" <?php echo $filter['status'] == 'submitted' ? 'selected' : '' ?>>Submitted</option>
-                                <option value="reviewed" <?php echo $filter['status'] == 'reviewed' ? 'selected' : '' ?>>Reviewed</option>
-                                <option value="approved" <?php echo $filter['status'] == 'approved' ? 'selected' : '' ?>>Approved</option>
-                                <option value="rejected" <?php echo $filter['status'] == 'rejected' ? 'selected' : '' ?>>Rejected</option>
-                                <?php } ?>
-
-                                <?php if($this->app_library->is_role_session('reviewer')) { ?>
-                                <option value="draft" <?php echo $filter['status'] == 'draft' ? 'selected' : '' ?>>Draft</option>
-                                <option value="submitted" <?php echo $filter['status'] == 'submitted' ? 'selected' : '' ?>>Submitted</option>
-                                <?php } ?>
-
-                                <?php if($this->app_library->is_role_session('approver')) { ?>
-                                <option value="reviewed" <?php echo $filter['status'] == 'reviewed' ? 'selected' : '' ?>>Reviewed</option>
-                                <?php /* ?>
-                                <option value="approved" <?php echo $filter['status'] == 'approved' ? 'selected' : '' ?>>Approved</option>
-                                <option value="rejected" <?php echo $filter['status'] == 'rejected' ? 'selected' : '' ?>>Rejected</option>
-                                <?php /**/ ?>
-                                <?php } ?>
                             </select>
                         </div>
                     </div>
                 </div>
+                <?php endif?>
                 <div class="col-lg-4 pr-3">
                     <div class="filter-search">
                         <div class="form-group">
@@ -166,9 +113,9 @@
                     </div>
                 </div>
             </div>
-                      <div class="row">
-                          <div class="col-lg-12"><input type="submit" class="btn btn-primary" value="Filter"/></div>
-                      </div>
+            <div class="row">
+                <div class="col-lg-12"><input type="submit" class="btn btn-primary" value="Filter"/></div>
+            </div>
         </form>
             </div>
         </div>

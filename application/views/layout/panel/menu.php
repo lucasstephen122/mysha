@@ -20,20 +20,50 @@
                             </a>
                         </li>
                         <?php } ?>
+                        <?php if($this->app_library->is_role_session('admin')) { ?>
+                            <li>
+                                <a class=" waves-effect waves-dark" href="<?php echo $base_url ?>panel/application/listing/all" aria-expanded="false">
+                                    <i class="mdi mdi-account-multiple"></i>
+                                    <span class="hide-menu">All Applications</span>
+                                </a>
+                            </li>
+                        <?php } ?>
+                        <?php if($this->app_library->is_role_session('reviewer')) { ?>
+                            <li>
+                                <a class=" waves-effect waves-dark" href="<?php echo $base_url ?>panel/application/listing/draft" aria-expanded="false">
+                                    <i class="mdi mdi-account-multiple"></i>
+                                    <span class="hide-menu">Draft Applications</span>
+                                </a>
+                            </li>
+                        <?php } ?>
+                        <?php if($this->app_library->is_role_session('reviewer')) { ?>
+                            <li>
+                                <a class=" waves-effect waves-dark" href="<?php echo $base_url ?>panel/application/listing/submitted" aria-expanded="false">
+                                    <i class="mdi mdi-account-multiple"></i>
+                                    <span class="hide-menu">Submitted Applications</span>
+                                </a>
+                            </li>
+                        <?php } ?>
                         <li>
-                            <a class=" waves-effect waves-dark" href="<?php echo $base_url ?>panel/application/listing" aria-expanded="false">
+                            <a class=" waves-effect waves-dark" href="<?php echo $base_url ?>panel/application/listing/approved" aria-expanded="false">
                                 <i class="mdi mdi-account-multiple"></i>
-                                <?php if($this->app_library->is_role_session('admin')) { ?>
-                                <span class="hide-menu">All Applications</span>
-                                <?php } ?>
-                                <?php if($this->app_library->is_role_session('reviewer')) { ?>
-                                <span class="hide-menu">New Applications</span>
-                                <?php } ?>
-                                <?php if($this->app_library->is_role_session('approver')) { ?>
-                                <span class="hide-menu">Reviewed Applications</span>
-                                <?php } ?>
+                                <span class="hide-menu">Approved Applications</span>
                             </a>
                         </li>
+                        <li>
+                            <a class=" waves-effect waves-dark" href="<?php echo $base_url ?>panel/application/listing/declined" aria-expanded="false">
+                                <i class="mdi mdi-account-multiple"></i>
+                                <span class="hide-menu">Declined Applications</span>
+                            </a>
+                        </li>
+                        <?php if($this->app_library->is_role_session('admin')) { ?>
+                            <li>
+                                <a class=" waves-effect waves-dark" href="<?php echo $base_url ?>panel/application/listing/conflicted" aria-expanded="false">
+                                    <i class="mdi mdi-account-multiple"></i>
+                                    <span class="hide-menu">Conflicted Applications</span>
+                                </a>
+                            </li>
+                        <?php } ?>
                         <li>
                             <a class=" waves-effect waves-dark" href="<?php echo $base_url ?>panel/application/comments" aria-expanded="false">
                                 <i class="mdi mdi-comment"></i>

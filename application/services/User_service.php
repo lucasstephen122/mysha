@@ -135,4 +135,8 @@
 			$reviewers = $this->ci->user_model->getReviewers();
 			return $reviewers;
 		}
+		public function getAdmins(){
+			$reviewers = $this->ci->user_model->getAdmins();
+			return $reviewers;
+		}
 	}

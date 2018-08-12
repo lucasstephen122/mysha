@@ -135,7 +135,11 @@
 							<small>Current Application Status:</small>
 						</h4>
 						<div class="form-group">
-							<b><?php echo ucwords($user['status']) ?></b>
+							<?php 
+								$status_word = $user['status'];
+								if($status_word == "conflicted" || $status_word == "approved" || $status_word == "declined")$status_word = "submitted";
+							?>
+							<b><?php echo ucwords($status_word) ?></b>
 						</div>	
 						<?php if($type == 'admin') { ?>
 						<h4 class="card-title">
@@ -169,6 +173,71 @@
                             </select>
                             <?php } ?>
                    		</div>
+                   		<?php } ?>
+					</div>
+					<hr>
+					<div class="card-body">
+						<h4 class="card-title">
+							<small>Application Approval Status:</small>
+						</h4>
+						<div class="form-group">
+							<?php 
+								$status_word = $user['status'];
+								if($status_word == "submitted" || $status_word == "draft")$status_word = "pending";
+							?>
+							<b><?php echo ucwords($user['status']) ?></b>
+						</div>	
+						<?php if($user['status'] && $type == 'admin' && $user['status'] != "draft") { ?>
+							
+							<?php
+								$admin_info = $this->user_session->get_session('admin');
+								$admin_id = $admin_info["user_id"];
+								$reviewer_status = (array)json_decode($user["reviewer_status"]);
+							?>
+							<?php if($this->app_library->is_role_session('reviewer')):?>
+								<?php if(count($reviewer_status)<2 || $reviewer_status[$admin_id]):?>
+								<h4 class="card-title">
+									<small>Change Approval Status:</small>
+								</h4>
+								<div class="form-group">
+									<?php if($this->app_library->is_role_session('reviewer')) { ?>
+									<select class="custom-select col-12" id="reviewer_status" name="reviewer_status">
+										<option value="">- Change Status -</option>
+										<option value="approved" <?php echo $reviewer_status[$admin_id] == 'approved' ? 'selected' : '' ?>>Approved</option>
+										<option value="declined" <?php echo $reviewer_status[$admin_id] == 'declined' ? 'selected' : '' ?>>Declined</option>
+									</select>
+									<?php } ?>
+								</div>
+								<?php endif?>
+							<?php endif?>
+							<?php if($this->app_library->is_role_session('admin')):?>
+								<h4 class="card-title">
+									<small>Approval Status:</small>
+								</h4>
+								<?php if($user['status'] == "conflicted"):?>
+									<?php foreach($reviewer_status as $user_id => $status):?>
+										<?php 
+											$user_service = Factory::get_service('user_service');
+											$reviewer = $user_service->get_user($user_id);
+										?>
+										<label class=''><?php echo "- ".$reviewer["name"]?> : </label>
+										<select class="custom-select col-lg-12" id="reviewer_status" name="admin_status[<?=$user_id?>]">
+											<option value="">- Change Status -</option>
+											<option value="approved" <?php echo $reviewer_status[$user_id] == 'approved' ? 'selected' : '' ?>>Approved</option>
+											<option value="declined" <?php echo $reviewer_status[$user_id] == 'declined' ? 'selected' : '' ?>>Declined</option>
+										</select><br><br>
+									<?php endforeach?>
+								<?php endif?>
+								<?php if($user['status'] != "conflicted"):?>
+									<?php foreach($reviewer_status as $user_id => $status):?>
+										<?php 
+											$user_service = Factory::get_service('user_service');
+											$reviewer = $user_service->get_user($user_id);
+										?>
+										<p><?php echo "- ".$reviewer["name"]." : ".ucwords($status)?></p>
+									<?php endforeach?>
+								<?php endif?>	
+							<?php endif?>
                    		<?php } ?>
 					</div>
 					<hr>

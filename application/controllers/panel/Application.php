@@ -239,7 +239,7 @@ class Application extends SRx_Controller
 		$this->layout->view('panel/application/insights' , $parse);
 	}
 
-	public function listing()
+	public function listing($app_status)
 	{
 		$user_service = Factory::get_service('user_service');
 		$filter = $this->input->get_string('filter');
@@ -249,26 +249,13 @@ class Application extends SRx_Controller
 		$criteria->add_criteria(User_search_criteria::$STATUS_NE , 'pending');
 		$criteria->add_criteria(User_search_criteria::$ARCHIVE , 'N');
 	
-		$first_name = $this->input->get_string('first_name');
-		if($first_name)
-			$criteria->add_criteria(User_search_criteria::$FIRST_NAME , $first_name);
-
-		$last_name = $this->input->get_string('last_name');
-		if($last_name)
-			$criteria->add_criteria(User_search_criteria::$LAST_NAME , $last_name);
-
-		$gender = $this->input->get_string('gender');
-		if($gender)
-			$criteria->add_criteria(User_search_criteria::$GENDER , $gender);
-
 		$city = $this->input->get_string('city');
 		if($city)
 			$criteria->add_criteria(User_search_criteria::$CITY , $city);
 
-		$region = $this->input->get_string('region');
-		if($region)
-			$criteria->add_criteria(User_search_criteria::$REGION , $region);
-
+		$number = $this->input->get_string('number');
+		if($number)
+			$criteria->add_criteria(User_search_criteria::$USER_ID , $number);
 
 		$work = $this->input->get_string('work');
 		if($work)
@@ -278,26 +265,24 @@ class Application extends SRx_Controller
 		if($bachelor_degree)
 			$criteria->add_criteria(User_search_criteria::$BACHELOR_DEGREE , $bachelor_degree);
 
-		$status = $this->input->get_string('status');
-		if($status)
-			$criteria->add_criteria(User_search_criteria::$STATUS , $status);
+		if($app_status == "all"){
+			$status = $this->input->get_string('status');
+			if($status)
+				$criteria->add_criteria(User_search_criteria::$STATUS , $status);
+		}else{
+			$criteria->add_criteria(User_search_criteria::$STATUS , $app_status);
+		}
 
 		$status_edit = $this->input->get_string('status_edit');
 		if($status_edit)
 			$criteria->add_criteria(User_search_criteria::$STATUS , $status_edit);
 
-		$progress = $this->input->get_string('progress');
-		if($progress == 'completed')
-			$criteria->add_criteria(User_search_criteria::$PROGRESS , 100);
-		else if($progress == 'incomplete')
-			$criteria->add_criteria(User_search_criteria::$PROGRESS_NE , 100);
-
-		if($this->app_library->is_role_session('reviewer')) {
-			$criteria->add_criteria(User_search_criteria::$STATUS_IN , ['draft' , 'submitted']);
-		} else if($this->app_library->is_role_session('approver')) {
-			// $criteria->add_criteria(User_search_criteria::$STATUS_IN , ['reviewed' , 'approved' , 'rejected']);
-			$criteria->add_criteria(User_search_criteria::$STATUS_IN , ['reviewed']);
-		}
+		// if($this->app_library->is_role_session('reviewer')) {
+		// 	$criteria->add_criteria(User_search_criteria::$STATUS_IN , ['draft' , 'submitted']);
+		// } else if($this->app_library->is_role_session('approver')) {
+		// 	// $criteria->add_criteria(User_search_criteria::$STATUS_IN , ['reviewed' , 'approved' , 'rejected']);
+		// 	$criteria->add_criteria(User_search_criteria::$STATUS_IN , ['reviewed']);
+		// }
 
 		$criteria->set_require_count(false);
 
@@ -356,20 +341,16 @@ class Application extends SRx_Controller
 		}
 
 		$filter = [];
-		$filter['first_name'] = $this->input->get_string('first_name');
-		$filter['last_name'] = $this->input->get_string('last_name');
-		$filter['gender'] = $this->input->get_string('gender');
 		$filter['city'] = $this->input->get_string('city');
-		$filter['region'] = $this->input->get_string('region');
 		$filter['work'] = $this->input->get_string('work');
 		$filter['bachelor_degree'] = $this->input->get_string('bachelor_degree');
 		$filter['status'] = $this->input->get_string('status');
-		$filter['status_edit'] = $this->input->get_string('status_edit');
-		$filter['progress'] = $this->input->get_string('progress');
+		$filter['number'] = $this->input->get_string('number');
 
 		$parse = array();
 		$parse['users'] = $users;
 		$parse['filter'] = $filter;
+		$parse["app_status"] = $app_status;
 		$this->layout->view('panel/application/listing' , $parse);
 	}
 
@@ -478,7 +459,6 @@ class Application extends SRx_Controller
 		$user['bachelor_degree'] = $this->input->get_string('bachelor_degree');
 
 		$user['application'] = $_REQUEST;
-		
 		if($this->input->get_string('status')) {
 			$user['status'] = $this->input->get_string('status');
 		}
@@ -486,7 +466,47 @@ class Application extends SRx_Controller
 		if($this->input->get_string('status_edit')) {
 			$user['status_edit'] = $this->input->get_string('status_edit');
 		}
-
+		if($this->input->get_string("reviewer_status")){
+			// $this->app_library->validate_session();
+			$admin = $this->user_session->get_session('admin');
+			$admin_id = $admin["user_id"];
+			$current_user = $user_service->get_user($user_id);
+			$reviewer_status = (array)json_decode($current_user["reviewer_status"]);
+			$reviewer_status[$admin_id] = $this->input->get_string("reviewer_status");
+			$user["reviewer_status"] = json_encode($reviewer_status);
+			$approved_count = 0;
+			$declined_count = 0;
+			foreach($reviewer_status as $status){
+				if($status == "approved")$approved_count += 1;
+				if($status == "declined")$declined_count += 1;
+			}
+			if($approved_count == 2)$user["status"] = "approved";
+			if($declined_count == 2)$user["status"] = "declined";
+			else if($declined_count == 1 && $approved_count == 1)$user["status"] = "conflicted";
+			///////////////////////////////////////////
+			if($user["status"] == "conflicted"){//When Conflictt send email to the Admin
+				$admins = $user_service->getAdmins();
+				foreach($admins as $admin){
+					$admin["comment"] = "The application for the ".$user["first_name"]." ".$user["last_name"]." was conflicted.";
+					$this->notification_library->send_template_emails([$admin['email']] , 'Application Conflicted' , 'application_conflict' , $admin);
+				}
+			}
+			////////////////////////////////////////
+		}
+		if($this->input->post("admin_status")){
+			$admin_status = $this->input->post("admin_status");
+			$reviewer_status = json_encode($admin_status);
+			$user["reviewer_status"] = $reviewer_status;
+			$approved_count = 0;
+			$declined_count = 0;
+			foreach($admin_status as $reviewer_id=>$status){
+				if($status == "approved")$approved_count += 1;
+				if($status == "declined")$declined_count += 1;
+			}
+			if($approved_count == 2)$user["status"] = "approved";
+			if($declined_count == 2)$user["status"] = "declined";
+			else if($declined_count == 1 && $approved_count == 1)$user["status"] = "conflicted";
+		}
 		$user['read'] = 'N';
 
 		$required_fields = $_REQUEST['required_fields'] ? explode(',' , $_REQUEST['required_fields']) : array();
